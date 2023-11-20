@@ -7,16 +7,31 @@ public class User {
    private ArrayList<Media> toWatchList;
    private  ArrayList<Media> watchedList;
 
+   User(String username, String password, boolean administrator){
+
+       this.username = username;
+       this.password = password;
+       this.administrator = administrator;
+
+   }
+
    public void addToWatchList(Media media){
 
+       toWatchList.add(media);
+
     }
-    public  ArrayList<Media> watchedList(){
-       return null;
+    public  ArrayList<Media> getWatchedList(){
+
+       return watchedList;
+
     }
-    public ArrayList<Media> toWatchList(){
-       return null;
+    public ArrayList<Media> getToWatchList(){
+
+       return toWatchList;
+
     }
-    void addMedia(){
+    void addMedia(Media media){
+
 
     }
 }
