@@ -1,12 +1,13 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public abstract class AMedia implements Media {
-    String[] genre;
+    ArrayList<String> genre = new ArrayList<>();
     String releaseYear;
     String titel;
     float rating;
 
-    public AMedia(String titel, String[] genre, String releaseYear, float rating){
+    public AMedia(String titel, ArrayList<String> genre, String releaseYear, float rating){
         this.releaseYear = releaseYear;
         this.genre = genre;
         this.titel = titel;
@@ -17,5 +18,10 @@ public abstract class AMedia implements Media {
     public void play(){
         System.out.println(titel + " is now playing");
     }
+
+    public ArrayList<String> getGenre(){
+        return genre;
+    }
+
 
 }

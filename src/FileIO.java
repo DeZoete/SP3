@@ -25,9 +25,15 @@ public class FileIO implements FileEditor{
 
                String [] genreList = genre.split(", ");
 
+               ArrayList<String> genreArrList = new ArrayList<>();
+
+               for (String g: genreList) {
+                   genreArrList.add(g);
+               }
+
                float rating = Float.parseFloat(row[3]);
 
-               Movie m = new Movie(titel,genreList,releaseYear,rating);
+               Movie m = new Movie(titel,genreArrList,releaseYear,rating);
                data.add(m);
 
            }

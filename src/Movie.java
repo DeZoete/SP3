@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class Movie extends AMedia{
 
 
-    public Movie(String titel, String[] genre, String releaseYear, float rating) {
+    public Movie(String titel, ArrayList<String> genre, String releaseYear, float rating) {
         super(titel, genre, releaseYear, rating);
     }
 
@@ -12,7 +14,7 @@ public class Movie extends AMedia{
 public String getTitel(){
         return titel;
 }
-    public String[] getGenre(){
+    public ArrayList<String> getGenre(){
         return genre;
     }
     public String getReleaseYear(){
