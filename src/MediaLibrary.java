@@ -9,7 +9,9 @@ public class MediaLibrary {
     private ArrayList<Media> allSeries;
 
     private ArrayList<Media> getGenreList(ArrayList<Media> mediaList,String genre){
-        return null;
+
+    return null;
+
     }
 
 }
