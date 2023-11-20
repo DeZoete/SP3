@@ -2,13 +2,40 @@ import java.util.HashMap;
 
 public class Series extends AMedia {
     int seasonAmount;
-    private HashMap<Integer,Integer> seasonEpisodeAmount;
+    private HashMap<Integer, Integer> seasonEpisodeAmount;
 
-    public void Play(){
-
+    public Series(String titel, String[] genre, String releaseYear, float rating) {
+        super(titel, genre, releaseYear, rating);
+        this.rating = rating;
     }
+
+
+    public void play() {
+        System.out.println(titel + " is now playing");
+    }
+
+    public String getTitel() {
+        return titel;
+    }
+
+    public String[] getGenre() {
+        return genre;
+    }
+
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
     @Override
-    public String toString(){
-        return null;
+    public String toString() {
+        return "\n Title:  "
+                + "\n Genre:  "
+                + "\n Release Year:  "
+                + "\n Rating:  ";
     }
 }
+
