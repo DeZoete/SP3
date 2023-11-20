@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!pragma layout smetana
 
 class Main
 class StreamingService
@@ -27,7 +28,7 @@ StreamingService *-- TextUI
 MediaLibrary *-- Media
 MediaLibrary o-- FileEditor
 StreamingService o-- FileEditor
-User -- MediaLibrary
+User *-- MediaLibrary
 
 Main *-- StreamingService
 
