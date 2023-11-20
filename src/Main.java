@@ -5,5 +5,6 @@ public class Main {
         genre[1] = "Krimi";
 Movie film = new Movie("Monner", genre,"2010", 9.9F);
 film.play();
+        System.out.println(film);
     }
 }

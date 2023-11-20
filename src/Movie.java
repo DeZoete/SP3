@@ -23,10 +23,10 @@ public String getTitel(){
     }
     @Override
     public String toString(){
-        return "\n Title:  "
-                + "\n Genre:  "
-                + "\n Release Year:  "
-                + "\n Rating:  ";
+        return "\n Title:  " + titel
+                + "\n Genre:  " + genre
+                + "\n Release Year:  " + releaseYear
+                + "\n Rating:  " + rating;
 
     }
 
