@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Series extends AMedia {
-    int seasonAmount;
-    private HashMap<Integer, Integer> seasonEpisodeAmount;
+    private int seasonAmount;
+    private HashMap<Integer, Integer> seasonEpisodeAmount = new HashMap<>();
 
-    public Series(String titel, ArrayList<String> genre, String releaseYear, float rating) {
+    public Series(String titel, ArrayList<String> genre, String releaseYear, float rating, int seasonAmount, HashMap<Integer, Integer> seasonEpisodeAmount) {
         super(titel, genre, releaseYear, rating);
-        this.rating = rating;
+        this.seasonAmount = seasonAmount;
+        this.seasonEpisodeAmount = seasonEpisodeAmount;
     }
 
 
@@ -29,6 +30,15 @@ public class Series extends AMedia {
 
     public float getRating() {
         return rating;
+    }
+
+    public int getSeasonAmount() {
+        return seasonAmount;
+    }
+
+    public int getSeasonEpisodeAmount(int seasonNum) {
+        int episodeAmount = seasonEpisodeAmount.get(seasonNum);
+        return episodeAmount;
     }
 
     @Override
