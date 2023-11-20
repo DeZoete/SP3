@@ -23,7 +23,7 @@ public class FileIO implements FileEditor{
 
                String genre = row[2];
 
-               String [] genreList = s.split(", ");
+               String [] genreList = genre.split(", ");
 
                float rating = Float.parseFloat(row[3]);
 
