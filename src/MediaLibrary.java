@@ -13,7 +13,8 @@ public class MediaLibrary {
         ArrayList<Media> genreList = new ArrayList<>();
 
         for (Media m : mediaList) {
-            if((m.getGenre).equals(genre)){
+                    m.getGenre();
+            if(().equals(genre)){
                 genreList.add(m);
             }
         }
