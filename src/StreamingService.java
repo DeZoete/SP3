@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class StreamingService {
@@ -75,55 +76,7 @@ public class StreamingService {
 
         } else if(input.equals("1")){
 
-            ui.displayMessage("Please enter your username.");
-            String userInput = ui.getInput();
-            ui.displayMessage("Please enter your password.");
-            String passwordInput = ui.getInput();
-            //User userSignIn = new User(userInput, passwordInput, false);
-            try {
-                Scanner scan = new Scanner(userFile);
-                boolean loggingin = false;
-                for (int i = 0; scan.hasNextLine(); i++) {
-                    String split = scan.nextLine();
-                    String[] usersAndPasswords = split.split(",");
-                    username = usersAndPasswords[0];
-                    password = usersAndPasswords[1];
-                    if (username.equals(userInput) && password.equals(passwordInput)) {
-
-                            ui.displayMessage("Logging in. Stand by.");
-                            loggingin=true;
-                        }
-
-
-                    }
-
-                if(!loggingin) {
-                    ui.displayMessage("Username or password incorrect. Press 1 to be redirected to the start menu.");
-                    if (ui.getInput().equals("1")) {
-
-                        startMenu();
-
-                    }
-                }
-            } catch (FileNotFoundException e){
-                System.out.println("File not found.");
-            }
-
-                    /*if(users.contains(userSignIn)){
-                        ui.displayMessage("Logging in. Stand by.");
-
-                    }*/
-                    /*for(User c: users){
-                        if(c.equals(userSignIn)){
-                            ui.displayMessage("Logging in. Stand by.");
-                        }
-                    }*/
-                    /*if(users.contains(userSignIn)){
-                        ui.displayMessage("Please enter your password.");
-                        if(users.contains(ui.getInput())){
-                            ui.displayMessage("Logging in. Stand by.");*/
-
-
+            logIn();
 
         } else{
             ui.displayMessage("Your input was invalid. Press 1 to be redirected to the start menu.");
@@ -137,8 +90,55 @@ public class StreamingService {
     }
     public void mainMenu(){
 
+       initializeLibrary();
+
+        for (Media me: series) {
+            System.out.println(me);
+
+        }
+
+
+    
+ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
+        "1. Search a media"+"\n"+
+        "2. Find a genre"+ "\n"+
+        "3. Watch later"+"\n"+
+        "4. Watch again"+"\n"+
+        "\n"+"9. Log out");
+        //"5. Add media to platform" det her bliver en admin funktion kun admin kan skal have adgang til);
+String input = ui.getInput();
+if (input.equals("1")){
+searchMedia();
+} else if (input.equals("2")) {
+    ui.displayMessage("find genre");//findGenre();
+} else if (input.equals("3")) {
+   ui.displayMessage("Wacthed Media"); //wacthedMedia();
+} else if (input.equals("4")) {
+    ui.displayMessage("Watch Later");// watchLater();
+}else if (input.equals("9")) {
+    startMenu();
+}
+
+
     }
     public void searchMedia(){
+        ui.displayMessage("Search for the title you want to watch"+"\n");
+
+        String input = ui.getInput();
+        ArrayList<Media>results = new ArrayList<>();
+        HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
+        for (Media m : media) {
+            String title = m.getTitel();
+            if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
+                results.add(m);
+            }
+        }
+            for(Media r : results ){
+            System.out.println(r);
+        }
+    }
+
+    public void searchGenre(){
 
     }
     private void signUp(){

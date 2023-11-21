@@ -43,10 +43,12 @@ public class Series extends AMedia {
 
     @Override
     public String toString() {
-        return "\n Title:  "
-                + "\n Genre:  "
-                + "\n Release Year:  "
-                + "\n Rating:  ";
+        return "\n Title:  " +titel
+                + "\n Genre:  "+genre
+                + "\n Release Year:  "+releaseYear
+                + "\n Rating:  "+rating
+                + "\n Season amount:  "+seasonAmount
+                + "\n Total episode amount:  "+this.getTotalepisodeAmount();
     }
 }
 
