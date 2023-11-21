@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class FileIO implements FileEditor{
 
     Scanner scan;
+    private File userFile = new File("src/userdata.txt");
 
    public ArrayList<Media> readMovieData(String moviePath){
        ArrayList<Media> data = new ArrayList<>();
@@ -102,7 +103,19 @@ public class FileIO implements FileEditor{
 
 
     public void writeUserData() {
-
+        try {
+            Scanner scan = new Scanner(userFile);
+            for (int i = 0; scan.hasNextLine(); i++) {
+                String split = scan.nextLine();
+                String[] usersAndPasswords = split.split(",");
+                String username = usersAndPasswords[0];
+                String password = usersAndPasswords[1];
+                User user = new User(username, password, false);
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found");
+        }
     }
 
 

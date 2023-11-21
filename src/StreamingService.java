@@ -10,13 +10,16 @@ import java.util.Scanner;
 public class StreamingService {
     private ArrayList<User> users = new ArrayList<>();
 
+    private File userFile = new File("src/userdata.txt");
 
 
     private String username;
     private String password;
-    File userFile = new File("src/userdata.txt");
+    //private File userFile = new File("src/userdata.txt");
 
     private TextUI ui = new TextUI();
+
+    private FileIO io = new FileIO();
 
     public void startMenu(){
 
@@ -25,19 +28,7 @@ public class StreamingService {
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
                 "2. Create a new user");
-        try {
-            Scanner scan = new Scanner(userFile);
-            for (int i = 0; scan.hasNextLine(); i++) {
-                String split = scan.nextLine();
-                String[] usersAndPasswords = split.split(",");
-                String username = usersAndPasswords[0];
-                String password = usersAndPasswords[1];
-                User user = new User(username, password, false);
-            }
-        }
-        catch(FileNotFoundException e){
-            System.out.println("File not found");
-        }
+        io.writeUserData();
         String input = ui.getInput();
         if(input.equals("2")){
 
