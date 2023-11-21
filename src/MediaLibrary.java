@@ -67,7 +67,7 @@ public class MediaLibrary {
             genres = m.getGenre();
 
             for (String g:genres) {
-                if(g.equals(genre)){
+                if((g.toLowerCase()).equals(genre.toLowerCase())){
                     genreList.add(m);
             }
 

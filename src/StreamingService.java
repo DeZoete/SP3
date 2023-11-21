@@ -72,7 +72,7 @@ String input = ui.getInput();
 if (input.equals("1")){
 searchMedia();
 } else if (input.equals("2")) {
-    ui.displayMessage("find genre");//findGenre();
+    searchGenre();
 } else if (input.equals("3")) {
    ui.displayMessage("Wacthed Media"); //wacthedMedia();
 } else if (input.equals("4")) {
@@ -100,7 +100,12 @@ searchMedia();
         }
     }
 
-    public void searchGenre(){
+    public void searchGenre() {
+        ui.displayMessage("Type in your genre you want to find" + "\n");
+
+        System.out.println(library.getMovieGenres());
+        String input = ui.getInput();
+        System.out.println(library.makeGenreList(media,input));
 
     }
     private void signUp(){

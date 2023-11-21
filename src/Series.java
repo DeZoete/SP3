@@ -59,7 +59,7 @@ public class Series extends AMedia {
                 + "\n Release Year:  "+releaseYear
                 + "\n Rating:  "+rating
                 + "\n Season amount:  "+seasonAmount
-                + "\n Total episode amount:  "+this.getTotalepisodeAmount();
+                + "\n Total episode amount:  "+this.getTotalepisodeAmount()+"\n";
     }
 }
 

@@ -28,7 +28,7 @@ public String getTitel(){
         return "\n Title:  " + titel
                 + "\n Genre:  "+ genre
                 + "\n Release Year:  " + releaseYear
-                + "\n Rating:  " + rating;
+                + "\n Rating:  " + rating+"\n";
 
     }
 
