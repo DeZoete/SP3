@@ -33,7 +33,7 @@ public class StreamingService {
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
                 "2. Create a new user");
-        io.writeUserData();
+        users = io.readUserData("src/userdata.txt");
         String input = ui.getInput();
         if(input.equals("2")){
 
@@ -53,15 +53,15 @@ public class StreamingService {
     public void mainMenu(){
 
        initializeLibrary();
-
+/*
         for (Media me: series) {
             System.out.println(me);
 
-        }
-
+       }
+*/
 
     
-ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
+ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
         "1. Search a media"+"\n"+
         "2. Find a genre"+ "\n"+
         "3. Watch later"+"\n"+
@@ -117,6 +117,8 @@ searchMedia();
         User user = new User(userInput, passwordInput, false);
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
+
+        //bro dette skal være i writeUserData()
         try{
 
             FileWriter writer = new FileWriter("src/userdata.txt",true);
@@ -126,8 +128,6 @@ searchMedia();
 
             }
             writer.close();
-
-
 
 
         } catch(IOException e){
@@ -148,6 +148,8 @@ searchMedia();
         ui.displayMessage("Please enter your password.");
         String passwordInput = ui.getInput();
         //User userSignIn = new User(userInput, passwordInput, false);
+
+        //Det er unødvendigt at læse filen igen. Vi har allerede user data i arraylisten users
         try {
             Scanner scan = new Scanner(userFile);
             boolean loggingin = false;
