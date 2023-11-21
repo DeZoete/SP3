@@ -41,6 +41,17 @@ public class Series extends AMedia {
         return episodeAmount;
     }
 
+    public int getTotalepisodeAmount(){
+        int sum = 0;
+
+        for(int i = 1; i<=seasonAmount; i++){
+            sum+=getSeasonEpisodeAmount(i);
+        }
+
+        return sum;
+    }
+
+
     @Override
     public String toString() {
         return "\n Title:  " +titel

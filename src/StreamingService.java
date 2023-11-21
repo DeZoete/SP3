@@ -11,13 +11,20 @@ import java.util.Scanner;
 public class StreamingService {
     private ArrayList<User> users = new ArrayList<>();
 
+    private ArrayList<String> mediaGenres = new ArrayList<>();
+    private ArrayList<Media> media = new ArrayList<>();
+    private ArrayList<Media> movies = new ArrayList<>();
+    private ArrayList<Media> series = new ArrayList<>();
+
 
 
     private String username;
     private String password;
-    File userFile = new File("src/userdata.txt");
+    private File userFile = new File("src/userdata.txt");
 
     private TextUI ui = new TextUI();
+    private FileIO io = new FileIO();
+    private MediaLibrary library = new MediaLibrary();
 
     public void startMenu(){
 
@@ -148,4 +155,34 @@ searchMedia();
     private void logIn(){
 
     }
+    private void initializeLibrary(){
+        movies = library.getAllMovies();
+        series = library.getAllSeries();
+        media = library.getAllMedia();
+    }
+
+    private void invalidInput(){
+
+        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the start menu.");
+        if(ui.getInput().equals("1")) {
+
+            startMenu();
+
+        } else{
+            invalidInput();
+        }
+    }
+
+    private void invalidUserPass(){
+
+        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the start menu.");
+        if(ui.getInput().equals("1")) {
+
+            startMenu();
+
+        } else{
+            invalidInput();
+        }
+    }
+
 }

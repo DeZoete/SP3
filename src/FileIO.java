@@ -15,22 +15,23 @@ public class FileIO implements FileEditor{
            Scanner scan = new Scanner(file);
            while (scan.hasNextLine()) {
                String s = scan.nextLine();// Hele linjen vil stå i én string
-
-               String [] row = s.split("; ");
+               String [] row = s.split(";");
 
                String titel = row[0];
 
-               String releaseYear = row[1];
+               String releaseYear = row[1].trim();
 
                String genre = row[2];
 
-               String [] genreList = genre.split(", ");
+               String [] genreList = genre.split(",");
 
                ArrayList<String> genreArrList = new ArrayList<>();
 
                for (String g: genreList) {
-                   genreArrList.add(g);
+                   genreArrList.add(g.trim());
                }
+
+               row[3] = row[3].replace(',', '.').trim();
 
                float rating = Float.parseFloat(row[3]);
 
@@ -52,11 +53,11 @@ public class FileIO implements FileEditor{
             while (scan.hasNextLine()) {
                 String s = scan.nextLine();// Hele linjen vil stå i én string
 
-                String [] row = s.split("; ");
+                String [] row = s.split(";");
 
                 String titel = row[0];
 
-                String releaseYear = row[1];
+                String releaseYear = row[1].trim();
 
                 String genre = row[2];
 
@@ -65,14 +66,16 @@ public class FileIO implements FileEditor{
                 ArrayList<String> genreArrList = new ArrayList<>();
 
                 for (String g: genreList) {
-                    genreArrList.add(g);
+                    genreArrList.add(g.trim());
                 }
+
+                row[3] = row[3].replace(',', '.').trim();
 
                 float rating = Float.parseFloat(row[3]);
 
                 String seasons = row[4];
 
-                String [] seasonsList = genre.split(", ");
+                String [] seasonsList = seasons.split(",");
 
                 int seasonAmount = 0;
 
@@ -82,7 +85,7 @@ public class FileIO implements FileEditor{
 
                     String [] seasonEpisode = se.split("-");
 
-                    seasonEpisodeAmount.put(Integer.parseInt(seasonEpisode[0]),Integer.parseInt(seasonEpisode[1]));
+                    seasonEpisodeAmount.put(Integer.parseInt(seasonEpisode[0].trim()),Integer.parseInt(seasonEpisode[1].trim()));
 
                     seasonAmount++;
 

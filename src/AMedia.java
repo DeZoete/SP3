@@ -23,5 +23,7 @@ public abstract class AMedia implements Media {
         return genre;
     }
 
-
+    public String getTitel() {
+        return titel;
+    }
 }
