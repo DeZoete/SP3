@@ -20,6 +20,13 @@ public class User {
         toWatchList.add(media);
 
     }
+
+    public void addWatchedList(Media media){
+
+        watchedList.add(media);
+
+    }
+
     public  ArrayList<Media> getWatchedList(){
 
         return watchedList;

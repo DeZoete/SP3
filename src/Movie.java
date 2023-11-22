@@ -11,7 +11,7 @@ public class Movie extends AMedia{
         System.out.println(titel + " is now playing");
 
     }
-public String getTitel(){
+    public String getTitel(){
         return titel;
 }
     public ArrayList<String> getGenre(){

@@ -51,12 +51,12 @@ public class StreamingService {
     public void mainMenu(){
 
        initializeLibrary();
-
+/*
         for (Media me: series) {
             System.out.println(me);
 
-        }
-        ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
+        }*/
+        ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
                 "1. Search a media"+"\n"+
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
@@ -126,30 +126,14 @@ public class StreamingService {
         User user = new User(userInput, passwordInput, false);
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
-        try{
 
-            FileWriter writer = new FileWriter("src/userdata.txt",true);
-            for(User s: users){
-                String userSave = s.getUsername() + "," + s.getPassword() + "\n";
-                writer.write(userSave);
+        io.writeUserData("src/userdata.txt", users);
 
-            }
-            writer.close();
-
-
-
-
-        } catch(IOException e){
-            ui.displayMessage("User not found. Press 1 to redirect to start menu.");
-            if(ui.getInput().equals("1")) {
-
-                startMenu();
-
-            }
+        startMenu();
 
         }
 
-    }
+
     private void logIn(){
 
         ui.displayMessage("Please enter your username.");
@@ -157,6 +141,8 @@ public class StreamingService {
         ui.displayMessage("Please enter your password.");
         String passwordInput = ui.getInput();
         //User userSignIn = new User(userInput, passwordInput, false);
+
+        //Det er unødvendigt at læse filen igen. Vi har allerede user data i arraylisten users
         try {
             Scanner scan = new Scanner(userFile);
             boolean loggingin = false;

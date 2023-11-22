@@ -1,13 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class FileIO implements FileEditor{
 
-    Scanner scan;
-    private File userFile = new File("src/userdata.txt");
 
    public ArrayList<Media> readMovieData(String moviePath){
        ArrayList<Media> data = new ArrayList<>();
@@ -105,7 +105,9 @@ public class FileIO implements FileEditor{
 
 
 
-    public void writeUserData() {
+    public ArrayList<User> readUserData(String userPath) {
+        ArrayList<User> users = new ArrayList<>();
+        File userFile = new File(userPath);
         try {
             Scanner scan = new Scanner(userFile);
             for (int i = 0; scan.hasNextLine(); i++) {
@@ -114,12 +116,33 @@ public class FileIO implements FileEditor{
                 String username = usersAndPasswords[0];
                 String password = usersAndPasswords[1];
                 User user = new User(username, password, false);
+                users.add(user);
             }
         }
         catch(FileNotFoundException e){
             System.out.println("File not found");
         }
+        return users;
     }
 
+    public void writeUserData(String userPath, ArrayList<User> users) {
+        try{
+
+            FileWriter writer = new FileWriter(userPath);
+            for(User s: users){
+                String userSave = s.getUsername() + "," + s.getPassword() + "\n";
+                writer.write(userSave);
+
+            }
+            writer.close();
+
+
+        } catch(IOException e){
+            System.out.println("File not found");
+
+            }
+
+
+        }
 
 }

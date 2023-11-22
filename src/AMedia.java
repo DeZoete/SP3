@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class AMedia implements Media {
@@ -25,5 +24,13 @@ public abstract class AMedia implements Media {
 
     public String getTitel() {
         return titel;
+    }
+
+    public String getReleaseYear() {
+        return releaseYear;
+    }
+
+    public float getRating() {
+        return rating;
     }
 }
