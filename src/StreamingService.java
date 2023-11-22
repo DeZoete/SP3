@@ -60,7 +60,7 @@ public class StreamingService {
                 "1. Search a media"+"\n"+
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
-                "4. List of watched content"+"\n"+
+                "4. Watch again"+"\n"+
                 "\n"+"9. Log out");
 
         String input = ui.getInput();
@@ -72,7 +72,12 @@ public class StreamingService {
                 searchGenre();
                 break;
             case "3":
-                ui.displayMessage("Watch later");
+                if(currentUser.getToWatchList().isEmpty()){
+                    ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+                    mainMenu();
+                }else {
+                    currentUser.getToWatchList();
+                }
                 break;
 
             case "4":
@@ -83,7 +88,7 @@ public class StreamingService {
                 startMenu();
                 break;
             default:
-                ui.displayMessage("Invalid input, try again");
+                invalidInput();
                 mainMenu();
                 break;
 
@@ -92,6 +97,11 @@ public class StreamingService {
 
         }
 
+    public void playMedia(Media m){
+        m.play();
+        currentUser.addWatchedList(m);
+        mainMenu();
+    }
 
     public void searchMedia(){
         ui.displayMessage("Search for the title you want to watch"+"\n");
@@ -115,7 +125,8 @@ public class StreamingService {
 
         System.out.println(library.getMovieGenres());
         String input = ui.getInput();
-        System.out.println(library.makeGenreList(media,input));
+        currentList = library.makeGenreList(media,input);
+        System.out.println(currentList);
 
     }
     private void signUp(){
@@ -141,35 +152,26 @@ public class StreamingService {
         String userInput = ui.getInput();
         ui.displayMessage("Please enter your password.");
         String passwordInput = ui.getInput();
-        //User userSignIn = new User(userInput, passwordInput, false);
+        User userSignIn = new User(userInput, passwordInput, false);
+        boolean loggingin = false;
+        for(User c: users) {
 
-        //Det er unødvendigt at læse filen igen. Vi har allerede user data i arraylisten users
-        try {
-            Scanner scan = new Scanner(userFile);
-            boolean loggingin = false;
-            for (int i = 0; scan.hasNextLine(); i++) {
-                String split = scan.nextLine();
-                String[] usersAndPasswords = split.split(",");
-                username = usersAndPasswords[0];
-                password = usersAndPasswords[1];
-                if (username.equals(userInput) && password.equals(passwordInput)) {
-
-                    ui.displayMessage("Logging in. Stand by.");
-                    loggingin=true;
-                    mainMenu();
-                }
-
-
+            if (userInput.equals(c.getUsername()) && passwordInput.equals(c.getPassword())) {
+                ui.displayMessage("Logging in. Stand by.");
+                currentUser = c;
+                loggingin = true;
+                mainMenu();
             }
+        }
 
-            if(!loggingin) {
 
+            if(!loggingin){
                 invalidUserPass();
             }
-        } catch (FileNotFoundException e){
-            System.out.println("File not found.");
         }
-    }
+
+
+
     private void initializeLibrary(){
         movies = library.getAllMovies();
         series = library.getAllSeries();
@@ -190,7 +192,7 @@ public class StreamingService {
 
     private void invalidUserPass(){
 
-        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the start menu.");
+        ui.displayMessage("Your username or password is invalid. Press 1 to be redirected to the start menu.");
         if(ui.getInput().equals("1")) {
 
             startMenu();
@@ -198,6 +200,25 @@ public class StreamingService {
         } else{
             invalidInput();
         }
+    }
+    private void MediaChoice(Media media){
+        ui.displayMessage("1. Play "+media+"\n"+
+                "2. Add to watch later"+"\n"+
+                "3. Go back to main menu");
+        String input = ui.getInput();
+      switch (input){
+          case"1":
+          playMedia(media);
+          break;
+          case"2":
+              currentUser.addToWatchList(media);
+              break;
+          case"3":
+              mainMenu();
+              break;
+          default:
+             invalidInput();
+      }
     }
 
 }

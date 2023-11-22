@@ -16,7 +16,6 @@ public class User {
     }
 
     public void addToWatchList(Media media){
-
         toWatchList.add(media);
 
     }
@@ -29,12 +28,13 @@ public class User {
 
     public  ArrayList<Media> getWatchedList(){
 
+
         return watchedList;
 
     }
     public ArrayList<Media> getToWatchList(){
 
-        return toWatchList;
+            return toWatchList;
 
     }
     void addMedia(Media media){
