@@ -75,16 +75,14 @@ public class StreamingService {
                 searchGenre();
                 break;
             case "3":
-                ui.displayMessage("Watched Media");
-                break;
-
-            case "4":
                 if(currentUser.getToWatchList().isEmpty()){
                     ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
                     mainMenu();
                 }else {
                     currentUser.getToWatchList();
                 }
+                break;
+            case "4":
                 break;
             case "5":
                 startMenu();
