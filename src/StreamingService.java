@@ -17,6 +17,9 @@ public class StreamingService {
     private ArrayList<Media> series = new ArrayList<>();
 
 
+    private User currentUser;
+    private ArrayList<Media> currentList;
+
 
     private String username;
     private String password;
@@ -61,7 +64,7 @@ public class StreamingService {
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
                 "4. Watch again"+"\n"+
-                "\n"+"9. Log out");
+                "\n"+"5. Log out");
 
         String input = ui.getInput();
         switch (input) {
@@ -81,9 +84,14 @@ public class StreamingService {
                 break;
 
             case "4":
-                ui.displayMessage("Watched content: ");
-                System.out.println(currentUser.watchedList);
+                if(currentUser.getToWatchList().isEmpty()){
+                    ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+                    mainMenu();
+                }else {
+                    currentUser.getToWatchList();
+                }
                 break;
+
             case "5":
                 startMenu();
                 break;
