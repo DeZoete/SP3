@@ -17,6 +17,9 @@ public class StreamingService {
     private ArrayList<Media> series = new ArrayList<>();
 
 
+    private User currentUser;
+    private ArrayList<Media> currentList;
+
 
     private String username;
     private String password;
@@ -61,7 +64,7 @@ public class StreamingService {
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
                 "4. Watch again"+"\n"+
-                "\n"+"9. Log out");
+                "\n"+"5. Log out");
 
         String input = ui.getInput();
         switch (input) {
@@ -114,7 +117,8 @@ public class StreamingService {
 
         System.out.println(library.getMovieGenres());
         String input = ui.getInput();
-        System.out.println(library.makeGenreList(media,input));
+        currentList = library.makeGenreList(media,input);
+        System.out.println(currentList);
 
     }
     private void signUp(){
