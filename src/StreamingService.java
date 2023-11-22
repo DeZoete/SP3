@@ -84,7 +84,7 @@ public class StreamingService {
                 break;
 
             case "4":
-                if(currentUser.getToWatchList().isEmpty()){
+                if(currentUser.getToWatchList()==null){
                     ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
                     mainMenu();
                 }else {
