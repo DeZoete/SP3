@@ -60,7 +60,7 @@ public class StreamingService {
                 "1. Search a media"+"\n"+
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
-                "4. Watch again"+"\n"+
+                "4. List of watched content"+"\n"+
                 "\n"+"9. Log out");
 
         String input = ui.getInput();
@@ -72,11 +72,12 @@ public class StreamingService {
                 searchGenre();
                 break;
             case "3":
-                ui.displayMessage("Watched Media");
+                ui.displayMessage("Watch later");
                 break;
 
             case "4":
-                ui.displayMessage("Watch Later");
+                ui.displayMessage("Watched content: ");
+                System.out.println(currentUser.watchedList);
                 break;
             case "5":
                 startMenu();
