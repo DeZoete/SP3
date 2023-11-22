@@ -67,4 +67,14 @@ public class TextUI{
         }
 
     }
+
+    public void displayArrayList(ArrayList<Media> media){
+        for (Media m : media){
+
+            System.out.println(m+"\n"+"______________________________________________"+"");
+
+        }
+
+    }
+
 }

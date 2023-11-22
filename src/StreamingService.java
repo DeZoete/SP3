@@ -150,6 +150,7 @@ public class StreamingService {
 
             if (userInput.equals(c.getUsername()) && passwordInput.equals(c.getPassword())) {
                 ui.displayMessage("Logging in. Stand by.");
+                currentUser = c;
                 loggingin = true;
                 mainMenu();
             }
@@ -161,32 +162,7 @@ public class StreamingService {
             }
         }
 
-        //Det er unødvendigt at læse filen igen. Vi har allerede user data i arraylisten users
-        /*try {
-            Scanner scan = new Scanner(userFile);
-            boolean loggingin = false;
-            for (int i = 0; scan.hasNextLine(); i++) {
-                String split = scan.nextLine();
-                String[] usersAndPasswords = split.split(",");
-                username = usersAndPasswords[0];
-                password = usersAndPasswords[1];
-                if (username.equals(userInput) && password.equals(passwordInput)) {
 
-                    ui.displayMessage("Logging in. Stand by.");
-                    loggingin=true;
-                    mainMenu();
-                }
-
-
-            }
-
-            if(!loggingin) {
-
-                invalidUserPass();
-            }
-        } catch (FileNotFoundException e){
-            System.out.println("File not found.");
-        }*/
 
     private void initializeLibrary(){
         movies = library.getAllMovies();
