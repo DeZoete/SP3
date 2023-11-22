@@ -140,10 +140,25 @@ public class StreamingService {
         String userInput = ui.getInput();
         ui.displayMessage("Please enter your password.");
         String passwordInput = ui.getInput();
-        //User userSignIn = new User(userInput, passwordInput, false);
+        User userSignIn = new User(userInput, passwordInput, false);
+        boolean loggingin = false;
+        for(User c: users) {
+
+            if (userInput.equals(c.getUsername()) && passwordInput.equals(c.getPassword())) {
+                ui.displayMessage("Logging in. Stand by.");
+                loggingin = true;
+                mainMenu();
+            }
+        }
+
+
+            if(!loggingin){
+                invalidUserPass();
+            }
+        }
 
         //Det er unødvendigt at læse filen igen. Vi har allerede user data i arraylisten users
-        try {
+        /*try {
             Scanner scan = new Scanner(userFile);
             boolean loggingin = false;
             for (int i = 0; scan.hasNextLine(); i++) {
@@ -167,8 +182,8 @@ public class StreamingService {
             }
         } catch (FileNotFoundException e){
             System.out.println("File not found.");
-        }
-    }
+        }*/
+
     private void initializeLibrary(){
         movies = library.getAllMovies();
         series = library.getAllSeries();
