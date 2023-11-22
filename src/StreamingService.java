@@ -94,6 +94,11 @@ public class StreamingService {
 
         }
 
+    public void playMedia(Media m){
+        m.play();
+        currentUser.addWatchedList(m);
+        mainMenu();
+    }
 
     public void searchMedia(){
         ui.displayMessage("Search for the title you want to watch"+"\n");
