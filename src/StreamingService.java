@@ -79,13 +79,18 @@ public class StreamingService {
                 break;
 
             case "4":
-                ui.displayMessage("Watch Later");
+                if(currentUser.getToWatchList().isEmpty()){
+                    ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+                    mainMenu();
+                }else {
+                    currentUser.getToWatchList();
+                }
                 break;
             case "5":
                 startMenu();
                 break;
             default:
-                ui.displayMessage("Invalid input, try again");
+                invalidInput();
                 mainMenu();
                 break;
 
@@ -216,6 +221,25 @@ public class StreamingService {
         } else{
             invalidInput();
         }
+    }
+    private void MediaChoice(Media media){
+        ui.displayMessage("1. Play "+media+"\n"+
+                "2. Add to watch later"+"\n"+
+                "3. Go back to main menu");
+        String input = ui.getInput();
+      switch (input){
+          case"1":
+          playMedia();
+          break;
+          case"2":
+              currentUser.addToWatchList(media);
+              break;
+          case"3":
+              mainMenu();
+              break;
+          default:
+             invalidInput();
+      }
     }
 
 }
