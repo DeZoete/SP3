@@ -33,21 +33,19 @@ public class StreamingService {
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
                 "2. Create a new user");
-        io.writeUserData();
+        users = io.readUserData("src/userdata.txt");
         String input = ui.getInput();
-        if(input.equals("2")){
-
-            signUp();
-
-        } else if(input.equals("1")){
-
-            logIn();
-
-        } else{
-
-            invalidInput();
-
-        }
+       switch(input){
+           case "1":
+               logIn();
+               break;
+           case "2":
+               signUp();
+               break;
+           default:
+               invalidInput();
+               break;
+       }
 
     }
     public void mainMenu(){
@@ -58,73 +56,42 @@ public class StreamingService {
             System.out.println(me);
 
         }
+        ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
+                "1. Search a media"+"\n"+
+                "2. Find a genre"+ "\n"+
+                "3. Watch later"+"\n"+
+                "4. Watch again"+"\n"+
+                "\n"+"9. Log out");
 
+        String input = ui.getInput();
+        switch (input) {
+            case "1":
+                searchMedia();
+                break;
+            case "2":
+                searchGenre();
+                break;
+            case "3":
+                ui.displayMessage("Watched Media");
+                break;
 
-    
-/*ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
-        "1. Search a media"+"\n"+
-        "2. Find a genre"+ "\n"+
-        "3. Watch later"+"\n"+
-        "4. Watch again"+"\n"+
-        "\n"+"9. Log out");
-        //"5. Add media to platform" det her bliver en admin funktion kun admin kan skal have adgang til);
-*/
-/*
-if (input.equals("1")){
-searchMedia();
-} else if (input.equals("2")) {
-    searchGenre();
-} else if (input.equals("3")) {
-   ui.displayMessage("Wacthed Media"); //wacthedMedia();
-} else if (input.equals("4")) {
-    ui.displayMessage("Watch Later");// watchLater();
-}else if (input.equals("9")) {
-    startMenu();
-}
+            case "4":
+                ui.displayMessage("Watch Later");
+                break;
+            case "5":
+                startMenu();
+                break;
+            default:
+                ui.displayMessage("Invalid input, try again");
+                mainMenu();
+                break;
 
- */
-        boolean validInput = false;
-        while(!validInput) {
-            ui.displayMessage("Please select your desire option from the menu below\n" + "\n" +
-                    "1. Search a media" + "\n" +
-                    "2. Find a genre" + "\n" +
-                    "3. Watch later" + "\n" +
-                    "4. Watch again" + "\n" +
-                    "\n" + "9. Log out");
-
-
-            String input = ui.getInput();
-            switch (input) {
-                case "1":
-                    searchMedia();
-                    validInput = true; //stopper loopet
-                    break;
-                case "2":
-                    searchGenre();
-                    validInput = true; //stopper loopet
-                    break;
-                case "3":
-                    ui.displayMessage("Watched Media");
-                    validInput = true; //stopper loopet
-                    break;
-
-                case "4":
-                    ui.displayMessage("Watch Later");
-                    validInput = true; //stopper loopet
-                    break;
-                case "5":
-                    startMenu();
-                    validInput = true; //stopper loopet
-                    break;
-                default:
-                    ui.displayMessage("Invalid input, try again");
-                    validInput = false; //kører loopet igen
-                    break;
-
-            }
         }
 
-    }
+
+        }
+
+
     public void searchMedia(){
         ui.displayMessage("Search for the title you want to watch"+"\n");
 
