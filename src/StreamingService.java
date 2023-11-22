@@ -184,7 +184,7 @@ public class StreamingService {
 
     private void invalidUserPass(){
 
-        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the start menu.");
+        ui.displayMessage("Your username or password is invalid. Press 1 to be redirected to the start menu.");
         if(ui.getInput().equals("1")) {
 
             startMenu();
