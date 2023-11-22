@@ -118,29 +118,13 @@ searchMedia();
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
 
-        //bro dette skal være i writeUserData()
-        try{
+        io.writeUserData("src/userdata.txt", users);
 
-            FileWriter writer = new FileWriter("src/userdata.txt",true);
-            for(User s: users){
-                String userSave = s.getUsername() + "," + s.getPassword() + "\n";
-                writer.write(userSave);
-
-            }
-            writer.close();
-
-
-        } catch(IOException e){
-            ui.displayMessage("User not found. Press 1 to redirect to start menu.");
-            if(ui.getInput().equals("1")) {
-
-                startMenu();
-
-            }
+        startMenu();
 
         }
 
-    }
+
     private void logIn(){
 
         ui.displayMessage("Please enter your username.");

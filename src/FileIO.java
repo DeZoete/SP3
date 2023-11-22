@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -123,8 +125,24 @@ public class FileIO implements FileEditor{
         return users;
     }
 
-    public void writeUserData() {
+    public void writeUserData(String userPath, ArrayList<User> users) {
+        try{
 
-    }
+            FileWriter writer = new FileWriter(userPath);
+            for(User s: users){
+                String userSave = s.getUsername() + "," + s.getPassword() + "\n";
+                writer.write(userSave);
+
+            }
+            writer.close();
+
+
+        } catch(IOException e){
+            System.out.println("File not found");
+
+            }
+
+
+        }
 
 }

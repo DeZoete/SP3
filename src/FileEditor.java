@@ -5,5 +5,5 @@ public interface FileEditor {
     public ArrayList<Media> readMovieData(String path);
     public ArrayList<Media> readSeriesData(String path);
 
-    void writeUserData();
+    public void writeUserData(String userPath, ArrayList<User> users);
 }
