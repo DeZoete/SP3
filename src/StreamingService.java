@@ -61,14 +61,15 @@ public class StreamingService {
 
 
     
-ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
+/*ui.displayMessage("Please select your desire option from the menu below\n"+"\n"+
         "1. Search a media"+"\n"+
         "2. Find a genre"+ "\n"+
         "3. Watch later"+"\n"+
         "4. Watch again"+"\n"+
         "\n"+"9. Log out");
         //"5. Add media to platform" det her bliver en admin funktion kun admin kan skal have adgang til);
-String input = ui.getInput();
+*/
+/*
 if (input.equals("1")){
 searchMedia();
 } else if (input.equals("2")) {
@@ -81,6 +82,47 @@ searchMedia();
     startMenu();
 }
 
+ */
+        boolean validInput = false;
+        while(!validInput) {
+            ui.displayMessage("Please select your desire option from the menu below\n" + "\n" +
+                    "1. Search a media" + "\n" +
+                    "2. Find a genre" + "\n" +
+                    "3. Watch later" + "\n" +
+                    "4. Watch again" + "\n" +
+                    "\n" + "9. Log out");
+
+
+            String input = ui.getInput();
+            switch (input) {
+                case "1":
+                    searchMedia();
+                    validInput = true; //stopper loopet
+                    break;
+                case "2":
+                    searchGenre();
+                    validInput = true; //stopper loopet
+                    break;
+                case "3":
+                    ui.displayMessage("Watched Media");
+                    validInput = true; //stopper loopet
+                    break;
+
+                case "4":
+                    ui.displayMessage("Watch Later");
+                    validInput = true; //stopper loopet
+                    break;
+                case "5":
+                    startMenu();
+                    validInput = true; //stopper loopet
+                    break;
+                default:
+                    ui.displayMessage("Invalid input, try again");
+                    validInput = false; //kører loopet igen
+                    break;
+
+            }
+        }
 
     }
     public void searchMedia(){
