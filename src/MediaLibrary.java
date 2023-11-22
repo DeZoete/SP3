@@ -130,6 +130,19 @@ public class MediaLibrary {
         return genreList;
     }
 
+    ArrayList<Media> makeMinimumRatingList(ArrayList<Media> mediaList, Float minRating){
+        ArrayList<Media> ratingList = new ArrayList<>();
+
+        for (Media m : mediaList) {
+            if(m.getRating()>=minRating){
+                    ratingList.add(m);
+            }
+        }
+
+        return ratingList;
+    }
+
+
 
 
 }
