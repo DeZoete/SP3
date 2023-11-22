@@ -210,7 +210,7 @@ public class StreamingService {
         String input = ui.getInput();
       switch (input){
           case"1":
-          playMedia();
+          playMedia(media);
           break;
           case"2":
               currentUser.addToWatchList(media);
