@@ -4,7 +4,6 @@ import java.util.HashSet;
 public class StreamingService {
     private ArrayList<User> users = new ArrayList<>();
 
-    private ArrayList<String> mediaGenres = new ArrayList<>();
     private ArrayList<Media> media = new ArrayList<>();
     private ArrayList<Media> movies = new ArrayList<>();
     private ArrayList<Media> series = new ArrayList<>();
@@ -13,7 +12,6 @@ public class StreamingService {
 
     private User currentUser;
     private ArrayList<Media> currentList;
-    private ArrayList<Media> emptyList = new ArrayList<>();
     private int mediaType;
 
 
@@ -63,7 +61,7 @@ public class StreamingService {
             case "1":
                 pickMediaType();
                 searchMedia();
-                System.out.println(currentList);
+                //System.out.println(currentList);
                 listEmpty();
                 mediaChoice(pickMedia(currentList));
 
@@ -71,13 +69,14 @@ public class StreamingService {
             case "2":
                 pickMediaType();
                 searchGenre();
-                System.out.println(currentList);
+                //System.out.println(currentList);
                 listEmpty();
                 mediaChoice(pickMedia(currentList));
                 break;
             case "3":
                 pickMediaType();
                 searchRating();
+                //System.out.println(currentList);
                 listEmpty();
                 mediaChoice(pickMedia(currentList));
                 break;
@@ -148,7 +147,7 @@ public class StreamingService {
         if (!input.equals("0")) {
             ArrayList<Media> results = new ArrayList<>();
             HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
-            for (Media m : media) {
+            for (Media m : currentList) {
                 String title = m.getTitel();
                 if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
                     results.add(m);
@@ -162,10 +161,24 @@ public class StreamingService {
     public void searchGenre() {
         ui.displayMessage("Type in your genre you want to find" + "\n" + "0. Go to main menu" + "\n");
 
-        System.out.println(library.getMovieGenres());
+        if(mediaType==1) {
+            System.out.println(library.getMovieGenres());
+        }
+        else if (mediaType==2){
+            System.out.println(library.getSeriesGenres());
+        }
+        else if (mediaType==3){
+            System.out.println(library.getMediaGenres());
+        }
+        else{
+            ui.displayMessage("Something went wrong with your media type. Try again.");
+            mainMenu();
+        }
+
+
         String input = ui.getInput();
         if (!input.equals("0")) {
-            currentList = library.makeGenreList(media, input);
+            currentList = library.makeGenreList(currentList, input);
             ui.displayArrayList(currentList);
         currentList = library.makeGenreList(currentList,input);
         ui.displayArrayList(currentList);
@@ -185,7 +198,7 @@ public class StreamingService {
         if (!input.equals("0")) {
             //Dette kan gå galt hvis bruger ikke skriver en float
             float rating = Float.parseFloat(input);
-            currentList = library.makeMinimumRatingList(media, rating);
+            currentList = library.makeMinimumRatingList(currentList, rating);
             ui.displayArrayList(currentList);
 
         } else if (input.equals("0")) {
@@ -309,13 +322,13 @@ public class StreamingService {
     }
     private void mediaChoice(Media media){
         ui.displayMessage("1. Play "+media.getTitel()+"\n"+
-                "2. Add to watch later"+"\n"+
+                "2. Add to plan to watch list"+"\n"+
                 "0. Go back to main menu");
         String input = ui.getInput();
       switch (input){
           case"1":
-          playMedia(media);
-          break;
+            playMedia(media);
+            break;
           case"2":
               currentUser.addToWatchList(media);
               mediaChoice(media);
@@ -352,7 +365,7 @@ public class StreamingService {
         switch (inputM){
             case"1":
                 mediaType=1;
-                currentList=series;
+                currentList=movies;
                 break;
             case"2":
                 mediaType=2;
