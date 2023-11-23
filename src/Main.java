@@ -5,7 +5,5 @@ public class Main {
 
         StreamingService stream = new StreamingService();
         stream.startMenu();
-
-
     }
 }

@@ -70,17 +70,22 @@ public class StreamingService {
             case "1":
                 pickMediaType();
                 searchMedia();
+                System.out.println(currentList);
+                listEmpty();
                 mediaChoice(pickMedia(currentList));
 
                 break;
             case "2":
                 pickMediaType();
                 searchGenre();
+                System.out.println(currentList);
+                listEmpty();
                 mediaChoice(pickMedia(currentList));
                 break;
             case "3":
                 pickMediaType();
                 searchRating();
+                listEmpty();
                 mediaChoice(pickMedia(currentList));
                 break;
             case "4":
@@ -103,7 +108,14 @@ public class StreamingService {
 
         }
 
-        public void kidsMenu(){
+    private void listEmpty() {
+        if(currentList.isEmpty()){
+            ui.displayMessage("Your list is empty please try again"+"\n");
+            mainMenu();
+        }
+    }
+
+    private void kidsMenu(){
 
         currentList = library.getKidsMedia();
             ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
@@ -149,9 +161,7 @@ public class StreamingService {
                     results.add(m);
                 }
             }
-            for (Media r : results) {
-                System.out.println(r);
-            }
+            ui.displayArrayList(results);
         } else if (input.equals("0")) {
             mainMenu();
         }
@@ -193,8 +203,8 @@ public class StreamingService {
 
 
     private void showHistory() {
-        if(currentUser.getWatchedList()==null){
-            ui.displayMessage("Your media history list is empty. Go watch some media :)");
+        if(currentUser.getWatchedList().isEmpty()){
+            ui.displayMessage("Your media history list is empty. Go watch some media :)"+"\n");
             mainMenu();
         }else {
             currentList=currentUser.getWatchedList();
@@ -204,8 +214,8 @@ public class StreamingService {
     }
 
     private void showToWatchlist() {
-        if(currentUser.getToWatchList()==null){
-            ui.displayMessage("Your plan to watch list is empty. When you find media you can add it to your plan to watch list");
+        if(currentUser.getToWatchList().isEmpty()){
+            ui.displayMessage("Your plan to watch list is empty. When you find media you can add it to your plan to watch list."+"\n");
             mainMenu();
         }else {
             currentList=currentUser.getToWatchList();
@@ -279,6 +289,14 @@ public class StreamingService {
             invalidInput();
         }
     }
+    private void invalidInputMainMenu(){
+        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the main menu.");
+        if(ui.getInput().equals("1")){
+            mainMenu();
+        } else {
+            invalidInputMainMenu();
+        }
+    }
 
     private void invalidUserPass(){
 
@@ -344,6 +362,7 @@ public class StreamingService {
             case"1":
                 mediaType=1;
                 currentList=movies;
+                break;
             case"2":
                 mediaType=2;
                 currentList=series;
@@ -356,7 +375,7 @@ public class StreamingService {
                 mainMenu();
                 break;
             default:
-                invalidInput();
+                invalidInputMainMenu();
         }
 
     }
