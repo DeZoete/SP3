@@ -55,11 +55,7 @@ public class StreamingService {
     public void mainMenu(){
 
        initializeLibrary();
-/*
-        for (Media me: series) {
-            System.out.println(me);
 
-        }*/
         ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
                 "1. Search for media"+"\n"+
                 "2. Find media sorted by genre"+ "\n"+
@@ -77,13 +73,13 @@ public class StreamingService {
                 searchGenre();
                 break;
             case "3":
-
+                searchRating();
                 break;
             case "4":
-
+                showToWatchlist();
                 break;
             case "5":
-
+                showHistory();
                 break;
 
             case "6":
@@ -132,9 +128,35 @@ public class StreamingService {
 
     }
 
+    public void searchRating() {
+        ui.displayMessage("Sort by rating. What is the minimum rating media should have?" + "\n");
+
+        String input = ui.getInput();
+
+        //Dette kan gå galt hvis bruger ikke skriver en float
+        float rating = Float.parseFloat(input);
+
+        currentList = library.makeMinimumRatingList(media,rating);
+        System.out.println(currentList);
+
+    }
+
+
+
     public void showHistory() {
+        if(currentUser.getWatchedList()==null){
+            ui.displayMessage("Your media history list is empty. Go watch some media :)");
+            mainMenu();
+        }else {
+            currentList=currentUser.getWatchedList();
+            ui.displayArrayList(currentList);
+            mainMenu();
+        }
+    }
+
+    public void showToWatchlist() {
         if(currentUser.getToWatchList()==null){
-            ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+            ui.displayMessage("Your plan to watch list is empty. When you find media you can add it to your plan to watch list");
             mainMenu();
         }else {
             currentList=currentUser.getToWatchList();
@@ -142,6 +164,9 @@ public class StreamingService {
             mainMenu();
         }
     }
+
+
+
 
     private void signUp(){
 
@@ -235,14 +260,24 @@ public class StreamingService {
              invalidInput();
       }
     }
-/*
+
     private Media pickMedia(ArrayList<Media> list){
+        ui.displayMessage("Pick media from the list above by writing a titel.");
+        String input = ui.getInput();
+        Boolean picked = false;
+        Media pickedMedia;
+        for (Media m : list) {
+            if(input.equalsIgnoreCase(m.getTitel())){
+                picked=true;
+                pickedMedia= m;
+                return pickedMedia;
+            }
+        }
 
-
-        Media pickedMedia =
-        return pickedMedia;
+        ui.displayMessage("The titel you wrote doesn't match your list. Try again.");
+        return pickMedia(list);
     }
-*/
+
 
 
 }
