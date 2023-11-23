@@ -21,11 +21,8 @@ public class StreamingService {
     private User currentUser;
     private ArrayList<Media> currentList;
     private ArrayList<Media> emptyList = new ArrayList<>();
+    private int mediaType;
 
-
-    private String username;
-    private String password;
-    private File userFile = new File("src/userdata.txt");
 
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
@@ -53,38 +50,41 @@ public class StreamingService {
        }
 
     }
-    public void mainMenu(){
+    private void mainMenu(){
 
-       initializeLibrary();
-/*
-        for (Media me: series) {
-            System.out.println(me);
+        initializeLibrary();
 
-        }*/
-        ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
-                "1. Search for media"+"\n"+
-                "2. Find media sorted by genre"+ "\n"+
-                "3. Find media sorted by rating"+ "\n"+
-                "4. Show plan to watch list"+"\n"+
-                "5. Show media history"+"\n"+
-                "\n"+"6. Log out");
+        ui.displayMessage("Please select your desired option from the menu below\n" + "\n" +
+                "1. Search for media" + "\n" +
+                "2. Find media sorted by genre" + "\n" +
+                "3. Find media sorted by rating" + "\n" +
+                "4. Show plan to watch list" + "\n" +
+                "5. Show media history" + "\n" +
+                "\n" + "6. Log out");
 
         String input = ui.getInput();
         switch (input) {
             case "1":
+                pickMediaType();
                 searchMedia();
+                mediaChoice(pickMedia(currentList));
+
                 break;
             case "2":
+                pickMediaType();
                 searchGenre();
+                mediaChoice(pickMedia(currentList));
                 break;
             case "3":
-
+                pickMediaType();
+                searchRating();
+                mediaChoice(pickMedia(currentList));
                 break;
             case "4":
-
+                showToWatchlist();
                 break;
             case "5":
-
+                showHistory();
                 break;
 
             case "6":
@@ -131,43 +131,78 @@ public class StreamingService {
 
         }
 
-    public void playMedia(Media m){
-        m.play();
-        currentUser.addWatchedList(m);
-        mainMenu();
-    }
 
-    public void searchMedia(){
-        ui.displayMessage("Search for the title you want to watch"+"\n");
+    public void searchMedia() {
+
+        ui.displayMessage("Search for the title you want to watch" + "\n" + "0. Go to main menu" + "\n");
 
         String input = ui.getInput();
-        ArrayList<Media>results = new ArrayList<>();
-        HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
-        for (Media m : media) {
-            String title = m.getTitel();
-            if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
-                results.add(m);
+        if (!input.equals("0")) {
+            ArrayList<Media> results = new ArrayList<>();
+            HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
+            for (Media m : media) {
+                String title = m.getTitel();
+                if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
+                    results.add(m);
+                }
             }
-        }
-            for(Media r : results ){
-            System.out.println(r);
+            for (Media r : results) {
+                System.out.println(r);
+            }
+        } else if (input.equals("0")) {
+            mainMenu();
         }
     }
-
-
     public void searchGenre() {
-        ui.displayMessage("Type in your genre you want to find" + "\n");
+        ui.displayMessage("Type in your genre you want to find" + "\n" + "0. Go to main menu" + "\n");
 
         System.out.println(library.getMovieGenres());
         String input = ui.getInput();
-        currentList = library.makeGenreList(media,input);
-        System.out.println(currentList);
+        if (!input.equals("0")) {
+            currentList = library.makeGenreList(media, input);
+            ui.displayArrayList(currentList);
+        currentList = library.makeGenreList(currentList,input);
+        ui.displayArrayList(currentList);
 
+        } else if (input.equals("0")) {
+            mainMenu();
+        } else{
+            ui.displayMessage("please enter a correct genre");
+            searchGenre();
+        }
     }
 
-    public void showHistory() {
+    public void searchRating() {
+       String input = String.valueOf(ui.getNumericInput("Sort by rating. What is the minimum rating media should have?" + "\n" + "0. Go to main menu" + "\n"));
+
+
+        if (!input.equals("0")) {
+            //Dette kan gå galt hvis bruger ikke skriver en float
+            float rating = Float.parseFloat(input);
+            currentList = library.makeMinimumRatingList(media, rating);
+            ui.displayArrayList(currentList);
+
+        } else if (input.equals("0")) {
+            mainMenu();
+        }
+    }
+
+
+
+    private void showHistory() {
+        if(currentUser.getWatchedList()==null){
+            ui.displayMessage("Your media history list is empty. Go watch some media :)");
+            mainMenu();
+        }else {
+            currentList=currentUser.getWatchedList();
+            ui.displayArrayList(currentList);
+            mainMenu();
+        }
+    }
+
+    private void showToWatchlist() {
         if(currentUser.getToWatchList()==null){
-            ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+            ui.displayMessage("Your plan to watch list is empty. When you find media you can add it to your plan to watch list");
             mainMenu();
         }else {
             currentList=currentUser.getToWatchList();
@@ -175,6 +210,9 @@ public class StreamingService {
             mainMenu();
         }
     }
+
+
+
 
     private void signUp(){
 
@@ -224,7 +262,7 @@ public class StreamingService {
         movies = library.getAllMovies();
         series = library.getAllSeries();
         media = library.getAllMedia();
-        kidsMedia = library.getAllMedia();
+
     }
 
     private void invalidInput(){
@@ -250,10 +288,15 @@ public class StreamingService {
             invalidInput();
         }
     }
+    private void playMedia(Media m){
+        m.play();
+        currentUser.addWatchedList(m);
+        mainMenu();
+    }
     private void mediaChoice(Media media){
         ui.displayMessage("1. Play "+media.getTitel()+"\n"+
                 "2. Add to watch later"+"\n"+
-                "3. Go back to main menu");
+                "0. Go back to main menu");
         String input = ui.getInput();
       switch (input){
           case"1":
@@ -263,21 +306,56 @@ public class StreamingService {
               currentUser.addToWatchList(media);
               mediaChoice(media);
               break;
-          case"3":
+          case"0":
               mainMenu();
               break;
           default:
              invalidInput();
       }
     }
-/*
+
     private Media pickMedia(ArrayList<Media> list){
+        ui.displayMessage("Pick media from the list above by writing a titel.");
+        String input = ui.getInput();
+        Boolean picked = false;
+        Media pickedMedia;
+        for (Media m : list) {
+            if(input.equalsIgnoreCase(m.getTitel())){
+                picked=true;
+                pickedMedia= m;
+                return pickedMedia;
+            }
+        }
 
-
-        Media pickedMedia =
-        return pickedMedia;
+        ui.displayMessage("The titel you wrote doesn't match your list. Try again.");
+        return pickMedia(list);
     }
-*/
+    private void pickMediaType(){
+        ui.displayMessage("Please select what type of media you want to search for\n"+"\n"+
+                "1. Movies"+"\n"+
+                "2. Series"+ "\n"+
+                "3. Both"+ "\n"+
+                "\n"+"0. Back to main menu");
+        String input = ui.getInput();
+        switch (input){
+            case"1":
+                mediaType=1;
+                currentList=movies;
+            case"2":
+                mediaType=2;
+                currentList=series;
+                break;
+            case"3":
+                mediaType=3;
+                currentList=media;
+                break;
+            case"0":
+                mainMenu();
+                break;
+            default:
+                invalidInput();
+        }
 
+    }
 
 }

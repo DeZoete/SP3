@@ -41,5 +41,17 @@ public class TextUI{
 
     }
 
+    public float getNumericInput(String msg) {
+        System.out.println(msg);
+       String input = getInput();
+       float num;
+       try {
+           num = Float.parseFloat(input);
+       }catch (NumberFormatException var5){
+           displayMessage("Please enter a number and use '.' instead of ','");
+           num= this.getNumericInput(msg);
+       }
+       return num;
+       }
 
 }
