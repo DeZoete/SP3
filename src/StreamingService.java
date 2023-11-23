@@ -52,7 +52,7 @@ public class StreamingService {
        }
 
     }
-    public void mainMenu(){
+    private void mainMenu(){
 
        initializeLibrary();
 
@@ -101,7 +101,7 @@ public class StreamingService {
 
 
 
-    public void searchMedia(){
+    private void searchMedia(){
         ui.displayMessage("Search for the title you want to watch"+"\n");
 
         String input = ui.getInput();
@@ -119,7 +119,7 @@ public class StreamingService {
         }
 
 
-    public void searchGenre() {
+    private void searchGenre() {
         ui.displayMessage("Type in your genre you want to find" + "\n");
 
         System.out.println(library.getMovieGenres());
@@ -129,7 +129,7 @@ public class StreamingService {
 
     }
 
-    public void searchRating() {
+    private void searchRating() {
         ui.displayMessage("Sort by rating. What is the minimum rating media should have?" + "\n");
 
         String input = ui.getInput();
@@ -144,7 +144,7 @@ public class StreamingService {
 
 
 
-    public void showHistory() {
+    private void showHistory() {
         if(currentUser.getWatchedList()==null){
             ui.displayMessage("Your media history list is empty. Go watch some media :)");
             mainMenu();
@@ -155,7 +155,7 @@ public class StreamingService {
         }
     }
 
-    public void showToWatchlist() {
+    private void showToWatchlist() {
         if(currentUser.getToWatchList()==null){
             ui.displayMessage("Your plan to watch list is empty. When you find media you can add it to your plan to watch list");
             mainMenu();
@@ -241,7 +241,7 @@ public class StreamingService {
             invalidInput();
         }
     }
-    public void playMedia(Media m){
+    private void playMedia(Media m){
         m.play();
         currentUser.addWatchedList(m);
         mainMenu();
@@ -283,7 +283,7 @@ public class StreamingService {
         ui.displayMessage("The titel you wrote doesn't match your list. Try again.");
         return pickMedia(list);
     }
-
+    private
 
 
 }
