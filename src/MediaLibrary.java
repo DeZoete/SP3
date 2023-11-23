@@ -37,7 +37,7 @@ public class MediaLibrary {
 
         return movieGenres;
     }
-    public ArrayList<String> getSeriesGenre() {
+    public ArrayList<String> getSeriesGenres() {
         seriesGenres.add("Talk-show");
         seriesGenres.add("Documentary");
         seriesGenres.add("Crime");
