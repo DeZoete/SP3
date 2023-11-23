@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class StreamingService {
@@ -102,9 +103,11 @@ public class StreamingService {
     }
 
     public void searchMedia(){
-        ui.displayMessage("Search for the title you want to watch"+"\n");
+
+        ui.displayMessage("Search for the title you want to watch"+"\n"+"9. Go to main menu"+"\n");
 
         String input = ui.getInput();
+        if(!input.equals("9")){
         ArrayList<Media>results = new ArrayList<>();
         HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
         for (Media m : media) {
@@ -116,15 +119,18 @@ public class StreamingService {
             for(Media r : results ){
             System.out.println(r);
         }
+    } else if(input.equals("9")){
+            mainMenu();
+        }
     }
 
     public void searchGenre() {
-        ui.displayMessage("Type in your genre you want to find" + "\n");
-
+        ui.displayMessage("Type in your genre you want to find" + "\n" + "9. Go to main menu" + "\n");
         System.out.println(library.getMovieGenres());
         String input = ui.getInput();
-        currentList = library.makeGenreList(media,input);
-        System.out.println(currentList);
+        if (!input.equals("9")) {
+            currentList = library.makeGenreList(media, input);
+            ui.displayArrayList(currentList);
 
     }
 
@@ -139,6 +145,9 @@ public class StreamingService {
         currentList = library.makeMinimumRatingList(media,rating);
         System.out.println(currentList);
 
+        } else if (input.equals("9")) {
+            mainMenu();
+        }
     }
 
 
