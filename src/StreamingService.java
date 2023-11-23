@@ -51,6 +51,9 @@ public class StreamingService {
 
     }
     private void mainMenu(){
+        if(currentUser.getAge()<15){
+            kidsMenu();
+        }
 
         initializeLibrary();
 

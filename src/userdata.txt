@@ -6,3 +6,5 @@ jonas,jonas,1
 1,1,1
 2,2,2
 3,3,3
+fred,fred,24
+jonas,jonas,10
