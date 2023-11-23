@@ -7,7 +7,6 @@ public class StreamingService {
     private ArrayList<Media> media = new ArrayList<>();
     private ArrayList<Media> movies = new ArrayList<>();
     private ArrayList<Media> series = new ArrayList<>();
-    private ArrayList<Media> kidsMedia = new ArrayList<>();
 
 
     private User currentUser;
@@ -52,7 +51,7 @@ public class StreamingService {
         }
         else {
 
-            ui.displayMessage("Please select your desired option from the menu below\n" + "\n" +
+            ui.displayMessage("\n"+"Please select your desired option from the menu below\n" + "\n" +
                     "1. Search for media" + "\n" +
                     "2. Find media sorted by genre" + "\n" +
                     "3. Find media sorted by rating" + "\n" +
@@ -107,21 +106,17 @@ public class StreamingService {
 
         }
 
-    private void listEmpty() {
-        if(currentList.isEmpty()){
-            ui.displayMessage("Your list is empty please try again"+"\n");
-            mainMenu();
-        }
-    }
+
 
     private void kidsMenu(){
 
-        currentList = kidsMedia;
-            ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
-                    "1. Search for media"+"\n"+
-                    "2. Show media history"+"\n"+
-                    "9. Log out"+"\n"+
-                    "\n"+"0. Exit");
+        ui.displayMessage("\n"+"Please select your desired option from the menu below\n" + "\n" +
+                "1. Search for media" + "\n" +
+                "2. Find media sorted by genre" + "\n" +
+                "4. Show plan to watch list" + "\n" +
+                "4. Show media history" + "\n" +
+                "\n"+"9. Log out" + "\n" +
+                "0. Exit" + "\n");
 
             String input = ui.getInput();
             switch (input) {
@@ -131,6 +126,12 @@ public class StreamingService {
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "2":
+                    showHistory();
+                    break;
+                case "3":
+                    showToWatchlist();
+                    break;
+                case "4":
                     showHistory();
                     break;
                 case "9":
@@ -150,6 +151,12 @@ public class StreamingService {
 
         }
 
+    private void listEmpty() {
+        if(currentList.isEmpty()){
+            ui.displayMessage("Your list is empty please try again"+"\n");
+            mainMenu();
+        }
+    }
 
     public void searchMedia() {
 
@@ -293,7 +300,6 @@ public class StreamingService {
         movies = library.getAllMovies();
         series = library.getAllSeries();
         media = library.getAllMedia();
-        kidsMedia = library.getKidsMedia();
 
     }
 
@@ -375,24 +381,49 @@ public class StreamingService {
                 "3. Both"+ "\n"+
                 "\n"+"0. Back to main menu");
         String inputM = ui.getInput();
-        switch (inputM){
-            case"1":
-                mediaType=1;
-                currentList=movies;
-                break;
-            case"2":
-                mediaType=2;
-                currentList=series;
-                break;
-            case"3":
-                mediaType=3;
-                currentList=media;
-                break;
-            case"0":
-                mainMenu();
-                break;
-            default:
-                invalidInputMainMenu();
+
+        if(currentUser.getAge()<15){
+            switch (inputM) {
+                case "1":
+                    mediaType = 1;
+                    currentList = library.makeGenreList(movies,"Family");
+                    break;
+                case "2":
+                    mediaType = 2;
+                    currentList = library.makeGenreList(series,"Family");
+                    break;
+                case "3":
+                    mediaType = 3;
+                    currentList = library.makeGenreList(media,"Family");
+                    break;
+                case "0":
+                    mainMenu();
+                    break;
+                default:
+                    invalidInputMainMenu();
+            }
+
+        }else {
+
+            switch (inputM) {
+                case "1":
+                    mediaType = 1;
+                    currentList = movies;
+                    break;
+                case "2":
+                    mediaType = 2;
+                    currentList = series;
+                    break;
+                case "3":
+                    mediaType = 3;
+                    currentList = media;
+                    break;
+                case "0":
+                    mainMenu();
+                    break;
+                default:
+                    invalidInputMainMenu();
+            }
         }
 
     }
