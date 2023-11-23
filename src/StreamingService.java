@@ -283,7 +283,7 @@ public class StreamingService {
         ui.displayMessage("The titel you wrote doesn't match your list. Try again.");
         return pickMedia(list);
     }
-    private
+
 
 
 }
