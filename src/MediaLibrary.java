@@ -95,9 +95,7 @@ public class MediaLibrary {
 
     }
     public ArrayList<Media> getKidsMedia(){
-        allKidsMedia=makeGenreList(allMedia,"Family");
-
-        return allKidsMedia;
+        return makeGenreList(allMedia,"Family");
     }
 
 

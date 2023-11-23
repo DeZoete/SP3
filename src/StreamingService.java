@@ -110,7 +110,8 @@ public class StreamingService {
 
     private void kidsMenu(){
 
-        currentList = library.getKidsMedia();
+        currentList = library.makeGenreList(media,"Family");
+        System.out.println(currentList);
             ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
                     "1. Search for media"+"\n"+
                     "2. Show media history"+"\n"+
