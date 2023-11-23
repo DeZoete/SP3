@@ -42,12 +42,11 @@ public class StreamingService {
 
     }
     private void mainMenu(){
+
         if(currentUser.getAge()<15){
             kidsMenu();
         }
         else {
-
-            initializeLibrary();
 
             ui.displayMessage("Please select your desired option from the menu below\n" + "\n" +
                     "1. Search for media" + "\n" +
@@ -62,7 +61,6 @@ public class StreamingService {
                 case "1":
                     pickMediaType();
                     searchMedia();
-                    //System.out.println(currentList);
                     listEmpty();
                     mediaChoice(pickMedia(currentList));
 
@@ -70,14 +68,12 @@ public class StreamingService {
                 case "2":
                     pickMediaType();
                     searchGenre();
-                    //System.out.println(currentList);
                     listEmpty();
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "3":
                     pickMediaType();
                     searchRating();
-                    //System.out.println(currentList);
                     listEmpty();
                     mediaChoice(pickMedia(currentList));
                     break;
@@ -110,8 +106,7 @@ public class StreamingService {
 
     private void kidsMenu(){
 
-        currentList = library.makeGenreList(media,"Family");
-        System.out.println(currentList);
+        currentList = kidsMedia;
             ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
                     "1. Search for media"+"\n"+
                     "2. Show media history"+"\n"+
@@ -121,9 +116,7 @@ public class StreamingService {
             String input = ui.getInput();
             switch (input) {
                 case "1":
-                    pickMediaType();
                     searchMedia();
-                    //System.out.println(currentList);
                     listEmpty();
                     mediaChoice(pickMedia(currentList));
                     break;
@@ -160,7 +153,8 @@ public class StreamingService {
                     results.add(m);
                 }
             }
-            ui.displayArrayList(results);
+            currentList = results;
+            ui.displayArrayList(currentList);
         } else if (input.equals("0")) {
             mainMenu();
         }
@@ -238,8 +232,6 @@ public class StreamingService {
     }
 
 
-
-
     private void signUp(){
 
         ui.displayMessage("Please enter a username.");
@@ -272,6 +264,7 @@ public class StreamingService {
                 ui.displayMessage("Logging in. Stand by.");
                 currentUser = c;
                 loggingin = true;
+                initializeLibrary();
                 mainMenu();
             }
         }
@@ -288,6 +281,7 @@ public class StreamingService {
         movies = library.getAllMovies();
         series = library.getAllSeries();
         media = library.getAllMedia();
+        kidsMedia = library.getKidsMedia();
 
     }
 
