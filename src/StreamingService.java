@@ -1,12 +1,5 @@
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class StreamingService {
     private ArrayList<User> users = new ArrayList<>();
@@ -30,7 +23,7 @@ public class StreamingService {
 
     public void startMenu(){
 
-        ui.displayMessage("Hello and welcome to Streamingservice! \n" +
+        ui.displayMessage("Hello and welcome to StreamStream! \n" +
                 "\n" +
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
@@ -338,11 +331,9 @@ public class StreamingService {
     private Media pickMedia(ArrayList<Media> list){
         ui.displayMessage("Pick media from the list above by writing a titel.");
         String input = ui.getInput();
-        Boolean picked = false;
         Media pickedMedia;
         for (Media m : list) {
             if(input.equalsIgnoreCase(m.getTitel())){
-                picked=true;
                 pickedMedia= m;
                 return pickedMedia;
             }
@@ -357,11 +348,11 @@ public class StreamingService {
                 "2. Series"+ "\n"+
                 "3. Both"+ "\n"+
                 "\n"+"0. Back to main menu");
-        String input = ui.getInput();
-        switch (input){
+        String inputM = ui.getInput();
+        switch (inputM){
             case"1":
                 mediaType=1;
-                currentList=movies;
+                currentList=series;
                 break;
             case"2":
                 mediaType=2;
