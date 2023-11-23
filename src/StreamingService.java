@@ -99,11 +99,7 @@ public class StreamingService {
 
         }
 
-    public void playMedia(Media m){
-        m.play();
-        currentUser.addWatchedList(m);
-        mainMenu();
-    }
+
 
     public void searchMedia(){
         ui.displayMessage("Search for the title you want to watch"+"\n");
@@ -244,6 +240,11 @@ public class StreamingService {
         } else{
             invalidInput();
         }
+    }
+    public void playMedia(Media m){
+        m.play();
+        currentUser.addWatchedList(m);
+        mainMenu();
     }
     private void mediaChoice(Media media){
         ui.displayMessage("1. Play "+media.getTitel()+"\n"+
