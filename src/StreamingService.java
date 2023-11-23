@@ -31,11 +31,12 @@ public class StreamingService {
 
     public void startMenu(){
 
-        ui.displayMessage("Hello and welcome to Streamingservice! \n" +
+        ui.displayMessage("\n" + "Hello and welcome to Streamingservice! \n" +
                 "\n" +
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
-                "2. Create a new user");
+                "2. Create a new user" + "\n" +
+                 "\n" + "0. Exit" + "\n");
         users = io.readUserData("src/userdata.txt");
         String input = ui.getInput();
        switch(input){
@@ -45,6 +46,8 @@ public class StreamingService {
            case "2":
                signUp();
                break;
+           case "0":
+               System.exit(0);
            default:
                invalidInput();
                break;
@@ -64,7 +67,8 @@ public class StreamingService {
                 "2. Find a genre"+ "\n"+
                 "3. Watch later"+"\n"+
                 "4. Watch again"+"\n"+
-                "\n"+"5. Log out");
+                "\n"+"9. Log out" + "\n" +
+                "0. Exit" + "\n");
 
         String input = ui.getInput();
         switch (input) {
@@ -92,12 +96,15 @@ public class StreamingService {
                 }
                 break;
 
-            case "5":
+            case "9":
+                ui.displayMessage("\n" + "You have been logged out.");
                 startMenu();
                 break;
+            case "0":
+                ui.displayMessage("\n" + "Thank you for using StreamingService.");
+                System.exit(0);
             default:
-                invalidInput();
-                mainMenu();
+                invalidInputMainMenu();
                 break;
 
         }
@@ -108,6 +115,29 @@ public class StreamingService {
     public void playMedia(Media m){
         m.play();
         currentUser.addWatchedList(m);
+        try{
+
+            Thread.sleep(5000);
+            ui.displayMessage(m.getTitel() + " is now finished playing." + "\n" +
+                    "\n"+
+                    "Would you like to submit a rating for the content you just watched?" + "\n"
+                    + "\n" +
+                    "1. Yes" + "\n" +
+                    "2. No");
+            String input = ui.getInput();
+            switch(input){
+                case "1":
+                    submitRating();
+                    break;
+                case "2":
+                    break;
+                default:
+                    invalidInputMainMenu();
+                    break;
+            }
+        } catch(InterruptedException e){
+            System.out.println("An error occurred while playing.");
+        }
         mainMenu();
     }
 
@@ -198,6 +228,17 @@ public class StreamingService {
         }
     }
 
+    private void invalidInputMainMenu(){
+        ui.displayMessage("Your input was invalid. Press 1 to be redirected to the main menu.");
+        if(ui.getInput().equals("1")) {
+
+            mainMenu();
+
+        } else{
+            invalidInputMainMenu();
+        }
+    }
+
     private void invalidUserPass(){
 
         ui.displayMessage("Your username or password is invalid. Press 1 to be redirected to the start menu.");
@@ -227,6 +268,20 @@ public class StreamingService {
           default:
              invalidInput();
       }
+    }
+
+    private void submitRating(){
+
+        ui.displayMessage("Please enter a rating between 1 and 10 that most accurately represents your opinion of the watched content.");
+        String input = ui.getInput();
+        int parsedInput = Integer.parseInt(input);
+        if(parsedInput > 0 && parsedInput <= 10){
+            ui.displayMessage("Thank you for submitting your rating!");
+        }
+        else{
+            ui.displayMessage("Your input was invalid.");
+            submitRating();
+        }
     }
 
 }

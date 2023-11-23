@@ -8,7 +8,8 @@ public class Movie extends AMedia{
     }
 
     public void play(){
-        System.out.println(titel + " is now playing");
+        System.out.println(titel + " is now playing.");
+
 
     }
     public String getTitel(){
