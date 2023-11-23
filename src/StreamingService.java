@@ -19,6 +19,7 @@ public class StreamingService {
 
     private User currentUser;
     private ArrayList<Media> currentList;
+    private ArrayList<Media> emptyList = new ArrayList<>();
 
 
     private String username;
@@ -60,11 +61,12 @@ public class StreamingService {
 
         }*/
         ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
-                "1. Search a media"+"\n"+
-                "2. Find a genre"+ "\n"+
-                "3. Watch later"+"\n"+
-                "4. Watch again"+"\n"+
-                "\n"+"5. Log out");
+                "1. Search for media"+"\n"+
+                "2. Find media sorted by genre"+ "\n"+
+                "3. Find media sorted by rating"+ "\n"+
+                "4. Show plan to watch list"+"\n"+
+                "5. Show media history"+"\n"+
+                "\n"+"6. Log out");
 
         String input = ui.getInput();
         switch (input) {
@@ -75,24 +77,16 @@ public class StreamingService {
                 searchGenre();
                 break;
             case "3":
-                if(currentUser.getToWatchList()==null){
-                    ui.displayMessage("Your watch later list is empty. Add a media to your watch later list."+"\n");
-                    mainMenu();
-                }else {
-                    currentUser.getToWatchList();
-                }
-                break;
 
+                break;
             case "4":
-                if(currentUser.getToWatchList()==null){
-                    ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
-                    mainMenu();
-                }else {
-                    currentUser.getToWatchList();
-                }
+
+                break;
+            case "5":
+
                 break;
 
-            case "5":
+            case "6":
                 startMenu();
                 break;
             default:
@@ -137,6 +131,18 @@ public class StreamingService {
         System.out.println(currentList);
 
     }
+
+    public void showHistory() {
+        if(currentUser.getToWatchList()==null){
+            ui.displayMessage("Your watch later list is empty. Add a media to your watch later");
+            mainMenu();
+        }else {
+            currentList=currentUser.getToWatchList();
+            ui.displayArrayList(currentList);
+            mainMenu();
+        }
+    }
+
     private void signUp(){
 
         ui.displayMessage("Please enter a username.");
@@ -209,8 +215,8 @@ public class StreamingService {
             invalidInput();
         }
     }
-    private void MediaChoice(Media media){
-        ui.displayMessage("1. Play "+media+"\n"+
+    private void mediaChoice(Media media){
+        ui.displayMessage("1. Play "+media.getTitel()+"\n"+
                 "2. Add to watch later"+"\n"+
                 "3. Go back to main menu");
         String input = ui.getInput();
@@ -220,6 +226,7 @@ public class StreamingService {
           break;
           case"2":
               currentUser.addToWatchList(media);
+              mediaChoice(media);
               break;
           case"3":
               mainMenu();
@@ -228,5 +235,14 @@ public class StreamingService {
              invalidInput();
       }
     }
+/*
+    private Media pickMedia(ArrayList<Media> list){
+
+
+        Media pickedMedia =
+        return pickedMedia;
+    }
+*/
+
 
 }
