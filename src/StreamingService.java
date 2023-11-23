@@ -68,12 +68,16 @@ public class StreamingService {
         switch (input) {
             case "1":
                 searchMedia();
+                mediaChoice(pickMedia(currentList));
+
                 break;
             case "2":
                 searchGenre();
+                mediaChoice(pickMedia(currentList));
                 break;
             case "3":
                 searchRating();
+                mediaChoice(pickMedia(currentList));
                 break;
             case "4":
                 showToWatchlist();
@@ -113,10 +117,11 @@ public class StreamingService {
                 results.add(m);
             }
         }
-            for(Media r : results ){
-            System.out.println(r);
+            currentList=results;
+           ui.displayArrayList(currentList);
+
         }
-    }
+
 
     public void searchGenre() {
         ui.displayMessage("Type in your genre you want to find" + "\n");
@@ -243,7 +248,7 @@ public class StreamingService {
     private void mediaChoice(Media media){
         ui.displayMessage("1. Play "+media.getTitel()+"\n"+
                 "2. Add to watch later"+"\n"+
-                "3. Go back to main menu");
+                "0. Go back to main menu");
         String input = ui.getInput();
       switch (input){
           case"1":
@@ -253,7 +258,7 @@ public class StreamingService {
               currentUser.addToWatchList(media);
               mediaChoice(media);
               break;
-          case"3":
+          case"0":
               mainMenu();
               break;
           default:
