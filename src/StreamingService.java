@@ -45,58 +45,59 @@ public class StreamingService {
         if(currentUser.getAge()<15){
             kidsMenu();
         }
+        else {
 
-        initializeLibrary();
+            initializeLibrary();
 
-        ui.displayMessage("Please select your desired option from the menu below\n" + "\n" +
-                "1. Search for media" + "\n" +
-                "2. Find media sorted by genre" + "\n" +
-                "3. Find media sorted by rating" + "\n" +
-                "4. Show plan to watch list" + "\n" +
-                "5. Show media history" + "\n" +
-                "\n" + "6. Log out");
+            ui.displayMessage("Please select your desired option from the menu below\n" + "\n" +
+                    "1. Search for media" + "\n" +
+                    "2. Find media sorted by genre" + "\n" +
+                    "3. Find media sorted by rating" + "\n" +
+                    "4. Show plan to watch list" + "\n" +
+                    "5. Show media history" + "\n" +
+                    "\n" + "6. Log out");
 
-        String input = ui.getInput();
-        switch (input) {
-            case "1":
-                pickMediaType();
-                searchMedia();
-                //System.out.println(currentList);
-                listEmpty();
-                mediaChoice(pickMedia(currentList));
+            String input = ui.getInput();
+            switch (input) {
+                case "1":
+                    pickMediaType();
+                    searchMedia();
+                    //System.out.println(currentList);
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
 
-                break;
-            case "2":
-                pickMediaType();
-                searchGenre();
-                //System.out.println(currentList);
-                listEmpty();
-                mediaChoice(pickMedia(currentList));
-                break;
-            case "3":
-                pickMediaType();
-                searchRating();
-                //System.out.println(currentList);
-                listEmpty();
-                mediaChoice(pickMedia(currentList));
-                break;
-            case "4":
-                showToWatchlist();
-                break;
-            case "5":
-                showHistory();
-                break;
+                    break;
+                case "2":
+                    pickMediaType();
+                    searchGenre();
+                    //System.out.println(currentList);
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
+                    break;
+                case "3":
+                    pickMediaType();
+                    searchRating();
+                    //System.out.println(currentList);
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
+                    break;
+                case "4":
+                    showToWatchlist();
+                    break;
+                case "5":
+                    showHistory();
+                    break;
 
-            case "6":
-                startMenu();
-                break;
-            default:
-                invalidInput();
-                mainMenu();
-                break;
+                case "6":
+                    startMenu();
+                    break;
+                default:
+                    invalidInput();
+                    mainMenu();
+                    break;
 
+            }
         }
-
 
         }
 
