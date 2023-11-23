@@ -4,8 +4,8 @@ public class User {
     private Boolean administrator;
     private String username;
     private String password;
-    private ArrayList<Media> toWatchList;
-    private  ArrayList<Media> watchedList;
+    private ArrayList<Media> toWatchList = new ArrayList<>();
+    private  ArrayList<Media> watchedList = new ArrayList<>();
 
     User(String username, String password, boolean administrator){
 
