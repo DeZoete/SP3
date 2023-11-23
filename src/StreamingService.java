@@ -15,6 +15,7 @@ public class StreamingService {
     private ArrayList<Media> media = new ArrayList<>();
     private ArrayList<Media> movies = new ArrayList<>();
     private ArrayList<Media> series = new ArrayList<>();
+    private ArrayList<Media> kidsMedia = new ArrayList<>();
 
 
     private User currentUser;
@@ -101,6 +102,32 @@ public class StreamingService {
 
         public void kidsMenu(){
 
+        currentList = library.getKidsMedia();
+            ui.displayMessage("Please select your desired option from the menu below\n"+"\n"+
+                    "1. Search for media"+"\n"+
+                    "2. Show media history"+"\n"+
+                    "9. Log out"+"\n"+
+                    "\n"+"0. Exit");
+
+            String input = ui.getInput();
+            switch (input) {
+                case "1":
+                    searchMedia();
+                    break;
+                case "2":
+                    break;
+                case "9":
+                    startMenu();
+                    break;
+                case "0":
+                    System.exit(0);
+                    break;
+                default:
+                    invalidInput();
+                    kidsMenu();
+                    break;
+
+            }
 
         }
 
@@ -126,6 +153,7 @@ public class StreamingService {
             System.out.println(r);
         }
     }
+
 
     public void searchGenre() {
         ui.displayMessage("Type in your genre you want to find" + "\n");
@@ -196,6 +224,7 @@ public class StreamingService {
         movies = library.getAllMovies();
         series = library.getAllSeries();
         media = library.getAllMedia();
+        kidsMedia = library.getAllMedia();
     }
 
     private void invalidInput(){

@@ -112,10 +112,12 @@ public class FileIO implements FileEditor{
             Scanner scan = new Scanner(userFile);
             for (int i = 0; scan.hasNextLine(); i++) {
                 String split = scan.nextLine();
-                String[] usersAndPasswords = split.split(",");
-                String username = usersAndPasswords[0];
-                String password = usersAndPasswords[1];
-                User user = new User(username, password, false);
+                String[] usersAndPasswordsAndAge = split.split(",");
+                String username = usersAndPasswordsAndAge[0];
+                String password = usersAndPasswordsAndAge[1];
+                String age = usersAndPasswordsAndAge[2];
+                int number = Integer.parseInt(age);
+                User user = new User(username, password, false,number);
                 users.add(user);
             }
         }
@@ -130,7 +132,7 @@ public class FileIO implements FileEditor{
 
             FileWriter writer = new FileWriter(userPath);
             for(User s: users){
-                String userSave = s.getUsername() + "," + s.getPassword() + "\n";
+                String userSave = s.getUsername() + "," + s.getPassword() + "," + s.getAge()+"\n";
                 writer.write(userSave);
 
             }
@@ -142,7 +144,5 @@ public class FileIO implements FileEditor{
 
             }
 
-
-        }
-
+}
 }

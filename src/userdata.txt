@@ -1,6 +1,8 @@
-Fred,857
-Marcus,123
-Jones,95958686
-fred1,gg
-jonas,jonas
-1,1
+Fred,857,20
+Marcus,123,30
+Jones,95958686,40
+fred1,gg,10
+jonas,jonas,1
+1,1,1
+2,2,2
+3,3,3

@@ -4,6 +4,7 @@ import java.util.Collections;
 public class MediaLibrary {
 
     FileIO io = new FileIO();
+
     ArrayList<String> movieGenres = new ArrayList<>();
     ArrayList<String> seriesGenres = new ArrayList<>();
     ArrayList<String> mediaGenres = new ArrayList<>();
@@ -11,6 +12,8 @@ public class MediaLibrary {
     ArrayList<Media> allMedia = new ArrayList<>();
     ArrayList<Media> allMovies = new ArrayList<>();
     ArrayList<Media> allSeries = new ArrayList<>();
+
+    ArrayList<Media> allKidsMedia= new ArrayList<>();
 
     public ArrayList<String> getMovieGenres() {
         movieGenres.add("Crime");
@@ -91,6 +94,11 @@ public class MediaLibrary {
         return mediaGenres;
 
     }
+    public ArrayList<Media> getKidsMedia(){
+        allKidsMedia=makeGenreList(allMedia,"Family");
+
+        return allKidsMedia;
+    }
 
 
 
@@ -116,7 +124,7 @@ public class MediaLibrary {
     }
 
 
-    ArrayList<Media> makeGenreList(ArrayList<Media> mediaList, String genre){
+    public ArrayList<Media> makeGenreList(ArrayList<Media> mediaList, String genre){
         ArrayList<Media> genreList = new ArrayList<>();
 
         for (Media m : mediaList) {
@@ -135,7 +143,7 @@ public class MediaLibrary {
 
         return genreList;
     }
-    ArrayList<Media> makeMinimumRatingList(ArrayList<Media> mediaList, Float minRating){
+    public ArrayList<Media> makeMinimumRatingList(ArrayList<Media> mediaList, Float minRating){
         ArrayList<Media> ratingList = new ArrayList<>();
 
         for (Media m : mediaList) {
