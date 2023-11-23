@@ -21,11 +21,12 @@ public class StreamingService {
 
     public void startMenu(){
 
-        ui.displayMessage("Hello and welcome to StreamStream! \n" +
+        ui.displayMessage("\n" + "Hello and welcome to Streamingservice! \n" +
                 "\n" +
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
-                "2. Create a new user");
+                "2. Create a new user" + "\n" +
+                "\n" + "0. Exit" + "\n");
         users = io.readUserData("src/userdata.txt");
         String input = ui.getInput();
        switch(input){
@@ -34,6 +35,9 @@ public class StreamingService {
                break;
            case "2":
                signUp();
+               break;
+           case "0":
+               System.exit(0);
                break;
            default:
                invalidInput();
@@ -54,7 +58,8 @@ public class StreamingService {
                     "3. Find media sorted by rating" + "\n" +
                     "4. Show plan to watch list" + "\n" +
                     "5. Show media history" + "\n" +
-                    "\n" + "6. Log out");
+                    "\n"+"9. Log out" + "\n" +
+                    "0. Exit" + "\n");
 
             String input = ui.getInput();
             switch (input) {
@@ -84,8 +89,13 @@ public class StreamingService {
                     showHistory();
                     break;
 
-                case "6":
+                case "9":
+                    ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
+                    break;
+                case "0":
+                    ui.displayMessage("\n" + "Thank you for using StreamStream.");
+                    System.exit(0);
                     break;
                 default:
                     invalidInput();
@@ -124,9 +134,11 @@ public class StreamingService {
                     showHistory();
                     break;
                 case "9":
+                    ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
                     break;
                 case "0":
+                    ui.displayMessage("\n" + "Thank you for using StreamingService.");
                     System.exit(0);
                     break;
                 default:
