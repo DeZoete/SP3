@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MediaLibrary {
 
@@ -32,8 +33,63 @@ public class MediaLibrary {
         movieGenres.add("Musical");
         movieGenres.add("Western");
         movieGenres.add("Music");
+        Collections.sort(movieGenres);
 
         return movieGenres;
+    }
+    public ArrayList<String> getSeriesGenre() {
+        seriesGenres.add("Talk-show");
+        seriesGenres.add("Documentary");
+        seriesGenres.add("Crime");
+        seriesGenres.add("Drama");
+        seriesGenres.add("Action");
+        seriesGenres.add("Adventure");
+        seriesGenres.add("Comedy");
+        seriesGenres.add("Fantasy");
+        seriesGenres.add("Animation");
+        seriesGenres.add("Horror");
+        seriesGenres.add("Sci-fi");
+        seriesGenres.add("War");
+        seriesGenres.add("Thriller");
+        seriesGenres.add("Mystery");
+        seriesGenres.add("Biography");
+        seriesGenres.add("History");
+        seriesGenres.add("Family");
+        seriesGenres.add("Western");
+        seriesGenres.add("Romance");
+        seriesGenres.add("Sport");
+        Collections.sort(seriesGenres);
+
+        return seriesGenres;
+    }
+
+    public ArrayList<String> getMediaGenres() {
+        mediaGenres.add("Talk-show");
+        mediaGenres.add("Documentary");
+        mediaGenres.add("Crime");
+        mediaGenres.add("Drama");
+        mediaGenres.add("Action");
+        mediaGenres.add("Adventure");
+        mediaGenres.add("Comedy");
+        mediaGenres.add("Fantasy");
+        mediaGenres.add("Animation");
+        mediaGenres.add("Horror");
+        mediaGenres.add("Sci-fi");
+        mediaGenres.add("War");
+        mediaGenres.add("Thriller");
+        mediaGenres.add("Mystery");
+        mediaGenres.add("Biography");
+        mediaGenres.add("History");
+        mediaGenres.add("Family");
+        mediaGenres.add("Western");
+        mediaGenres.add("Romance");
+        mediaGenres.add("Sport");
+        mediaGenres.add("Film-Noir");
+        mediaGenres.add("Musical");
+        mediaGenres.add("Music");
+        Collections.sort(mediaGenres);
+    return mediaGenres;
+
     }
 
     public ArrayList<Media> getAllMovies() {
@@ -43,6 +99,7 @@ public class MediaLibrary {
 
     public ArrayList<Media> getAllSeries() {
         allSeries = io.readSeriesData("src/100bedsteserier.txt");
+
         return allSeries;
     }
 
