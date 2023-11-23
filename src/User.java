@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 
 public class User {
+    private int age;
     private Boolean administrator;
     private String username;
     private String password;
     private ArrayList<Media> toWatchList;
     private  ArrayList<Media> watchedList;
 
-    User(String username, String password, boolean administrator){
-
+    User(String username, String password, boolean administrator,int age){
+        this.age = age;
         this.username = username;
         this.password = password;
         this.administrator = administrator;
@@ -49,4 +50,5 @@ public class User {
     public String getPassword(){
         return password;
     }
+
 }

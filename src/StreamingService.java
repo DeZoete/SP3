@@ -99,6 +99,11 @@ public class StreamingService {
 
         }
 
+        public void kidsMenu(){
+
+
+        }
+
     public void playMedia(Media m){
         m.play();
         currentUser.addWatchedList(m);
@@ -149,7 +154,9 @@ public class StreamingService {
         String userInput = ui.scan.nextLine();
         ui.displayMessage("Please enter a password.");
         String passwordInput = ui.scan.nextLine();
-        User user = new User(userInput, passwordInput, false);
+       int age = ui.getUserAge("Please enter your age");
+        User user = new User(userInput, passwordInput, false,age);
+
         users.add(user);
         ui.displayMessage("Thank you for signing up , " + userInput + ".");
 
@@ -166,7 +173,6 @@ public class StreamingService {
         String userInput = ui.getInput();
         ui.displayMessage("Please enter your password.");
         String passwordInput = ui.getInput();
-        User userSignIn = new User(userInput, passwordInput, false);
         boolean loggingin = false;
         for(User c: users) {
 

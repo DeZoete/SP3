@@ -24,6 +24,22 @@ public class TextUI{
         }
 
     }
+    public int getUserAge(String msg){
+        System.out.println(msg);
+
+        String input = scan.nextLine();          //Give brugere et sted at placere sit svar og vente på svaret
+        int num = 0;
+        try {
+            num = Integer.parseInt(input);       //Konvertere svaret til et tal
+
+        }catch (NumberFormatException e){ //den sørger for hvis brugeren skriver noget som ikke er et tal så fanger den det med et formatException
+            System.out.println("This was not a number, "+e.getMessage());
+            num = getUserAge(msg);
+
+        }
+        return num;
+
+    }
 
 
 }
