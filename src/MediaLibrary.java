@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MediaLibrary {
 
@@ -32,10 +33,10 @@ public class MediaLibrary {
         movieGenres.add("Musical");
         movieGenres.add("Western");
         movieGenres.add("Music");
+        Collections.sort(movieGenres);
 
         return movieGenres;
     }
-
     public ArrayList<String> getSeriesGenre() {
         seriesGenres.add("Talk-show");
         seriesGenres.add("Documentary");
@@ -57,13 +58,12 @@ public class MediaLibrary {
         seriesGenres.add("Western");
         seriesGenres.add("Romance");
         seriesGenres.add("Sport");
+        Collections.sort(seriesGenres);
 
         return seriesGenres;
     }
 
     public ArrayList<String> getMediaGenres() {
-        ArrayList<String> mediaGenres = new ArrayList<>();
-
         mediaGenres.add("Talk-show");
         mediaGenres.add("Documentary");
         mediaGenres.add("Crime");
@@ -87,8 +87,9 @@ public class MediaLibrary {
         mediaGenres.add("Film-Noir");
         mediaGenres.add("Musical");
         mediaGenres.add("Music");
-
+        Collections.sort(mediaGenres);
         return mediaGenres;
+
     }
 
 
