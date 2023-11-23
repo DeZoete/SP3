@@ -120,9 +120,14 @@ public class StreamingService {
             String input = ui.getInput();
             switch (input) {
                 case "1":
+                    pickMediaType();
                     searchMedia();
+                    //System.out.println(currentList);
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
                     break;
                 case "2":
+                    showHistory();
                     break;
                 case "9":
                     startMenu();
