@@ -23,10 +23,6 @@ public class StreamingService {
     private int mediaType;
 
 
-    private String username;
-    private String password;
-    private File userFile = new File("src/userdata.txt");
-
     private TextUI ui = new TextUI();
     private FileIO io = new FileIO();
     private MediaLibrary library = new MediaLibrary();
