@@ -20,6 +20,7 @@ public class StreamingService {
     private User currentUser;
     private ArrayList<Media> currentList;
     private ArrayList<Media> emptyList = new ArrayList<>();
+    private int mediaType;
 
 
     private String username;
@@ -67,15 +68,18 @@ public class StreamingService {
         String input = ui.getInput();
         switch (input) {
             case "1":
+                pickMediaType();
                 searchMedia();
                 mediaChoice(pickMedia(currentList));
 
                 break;
             case "2":
+                pickMediaType();
                 searchGenre();
                 mediaChoice(pickMedia(currentList));
                 break;
             case "3":
+                pickMediaType();
                 searchRating();
                 mediaChoice(pickMedia(currentList));
                 break;
@@ -107,7 +111,7 @@ public class StreamingService {
         String input = ui.getInput();
         ArrayList<Media>results = new ArrayList<>();
         HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
-        for (Media m : media) {
+        for (Media m : currentList) {
             String title = m.getTitel();
             if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
                 results.add(m);
@@ -122,10 +126,22 @@ public class StreamingService {
     private void searchGenre() {
         ui.displayMessage("Type in your genre you want to find" + "\n");
 
-        System.out.println(library.getMovieGenres());
+        if(mediaType==1) {
+            System.out.println(library.getMovieGenres());
+        }
+        else if (mediaType==2){
+            System.out.println(library.getSeriesGenres());
+        }
+        else if (mediaType==3){
+            System.out.println(library.getMediaGenres());
+        }
+        else{
+
+        }
+
         String input = ui.getInput();
-        currentList = library.makeGenreList(media,input);
-        System.out.println(currentList);
+        currentList = library.makeGenreList(currentList,input);
+        ui.displayArrayList(currentList);
 
     }
 
@@ -283,7 +299,33 @@ public class StreamingService {
         ui.displayMessage("The titel you wrote doesn't match your list. Try again.");
         return pickMedia(list);
     }
+    private void pickMediaType(){
+        ui.displayMessage("Please select what type of media you want to search for\n"+"\n"+
+                "1. Movies"+"\n"+
+                "2. Series"+ "\n"+
+                "3. Both"+ "\n"+
+                "\n"+"0. Back to main menu");
+        String input = ui.getInput();
+        switch (input){
+            case"1":
+                mediaType=1;
+                currentList=movies;
+            case"2":
+                mediaType=2;
+                currentList=series;
+                break;
+            case"3":
+                mediaType=3;
+                currentList=media;
+                break;
+            case"0":
+                mainMenu();
+                break;
+            default:
+                invalidInput();
+        }
 
+    }
 
 
 }
