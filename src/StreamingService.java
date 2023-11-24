@@ -182,7 +182,7 @@ public class StreamingService {
             HashSet<String> uniqueList = new HashSet<>(); //Der kan kun være en af hver
             for (Media m : currentList) {
                 String title = m.getTitel();
-                if (title.toLowerCase().contains(input) && uniqueList.add(title.toLowerCase())) {
+                if (title.toLowerCase().contains(input.toLowerCase()) && uniqueList.add(title.toLowerCase())) {
                     results.add(m);
                 }
             }
