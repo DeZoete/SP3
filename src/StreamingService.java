@@ -20,7 +20,7 @@ public class StreamingService {
 
     public void startMenu(){
 
-        ui.displayMessage("\n" + "Hello and welcome to Streamingservice! \n" +
+        ui.displayMessage("\n" + "Hello and welcome to StreamStream! \n" +
                 "\n" +
                 "Please choose one of the following options:" + "\n" +
                 "1. Sign in to an existing user \n" +
@@ -153,7 +153,7 @@ public class StreamingService {
                     startMenu();
                     break;
                 case "0":
-                    ui.displayMessage("\n" + "Thank you for using StreamingService.");
+                    ui.displayMessage("\n" + "Thank you for using StreamStream.");
                     System.exit(0);
                     break;
                 default:
