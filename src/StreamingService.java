@@ -213,8 +213,6 @@ public class StreamingService {
 
         String input = ui.getInput();
         if (!input.equals("0")) {
-            currentList = library.makeGenreList(currentList, input);
-            ui.displayArrayList(currentList);
         currentList = library.makeGenreList(currentList,input);
         ui.displayArrayList(currentList);
         sortFurther();
