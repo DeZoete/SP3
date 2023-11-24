@@ -33,7 +33,7 @@ public class TextUI{
             num = Integer.parseInt(input);       //Konvertere svaret til et tal
 
         }catch (NumberFormatException e){ //den sørger for hvis brugeren skriver noget som ikke er et tal så fanger den det med et formatException
-            System.out.println("This was not a number, "+e.getMessage());
+            System.out.println("This was not a number. Please try again.");
             num = getUserAge(msg);
 
         }
