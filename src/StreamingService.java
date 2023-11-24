@@ -97,8 +97,7 @@ public class StreamingService {
                     System.exit(0);
                     break;
                 default:
-                    invalidInput();
-                    mainMenu();
+                    invalidInputMainMenu();
                     break;
 
             }

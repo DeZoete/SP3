@@ -54,4 +54,17 @@ public class TextUI{
        return num;
        }
 
+    public int getNumericInputInt(String msg) {
+        System.out.println(msg);
+        String input = getInput();
+        int num;
+        try {
+            num = Integer.parseInt(input);
+        }catch (NumberFormatException var5){
+            displayMessage("Please enter a number");
+            num= this.getNumericInputInt(msg);
+        }
+        return num;
+    }
+
 }

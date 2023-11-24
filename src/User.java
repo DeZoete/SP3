@@ -20,6 +20,9 @@ public class User {
         toWatchList.add(media);
 
     }
+    public void removeFromWatchList(Media media){
+   toWatchList.remove(media);
+    }
 
     public void addWatchedList(Media media){
 
