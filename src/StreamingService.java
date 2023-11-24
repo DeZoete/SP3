@@ -350,11 +350,37 @@ public class StreamingService {
             invalidInput();
         }
     }
-    private void playMedia(Media m){
+
+
+    public void playMedia(Media m){
         m.play();
         currentUser.addWatchedList(m);
+        try{
+
+            Thread.sleep(5000);
+            ui.displayMessage(m.getTitel() + " is now finished playing." + "\n" +
+                    "\n"+
+                    "Would you like to submit a rating for the content you just watched?" + "\n"
+                    + "\n" +
+                    "1. Yes" + "\n" +
+                    "2. No");
+            String input = ui.getInput();
+            switch(input){
+                case "1":
+                    submitRating();
+                    break;
+                case "2":
+                    break;
+                default:
+                    invalidInputMainMenu();
+                    break;
+            }
+        } catch(InterruptedException e){
+            System.out.println("An error occurred while playing.");
+        }
         mainMenu();
     }
+
     private void mediaChoice(Media media){
         ui.displayMessage("1. Play "+media.getTitel()+"\n"+
                 "2. Add to plan to watch list"+"\n"+
@@ -484,5 +510,49 @@ public class StreamingService {
         }
 
     }
+
+    private void submitRating(){
+
+
+         int input =ui.getNumericInputInt("Please enter a rating between 1 and 10 that most accurately represents your opinion of the watched content, with 1 being the lowest and 10 being the highest.");
+        if(input > 0 && input <= 10){
+            ui.displayMessage("Thank you for submitting your rating!");
+        }
+        else{
+            ui.displayMessage("Your input was invalid.");
+            submitRating();
+        }
+    }
+
+    private void sortFurther(){
+        listEmpty();
+        ui.displayMessage("Do you want to sort further?\n"+"\n"+
+                "1. No"+"\n"+
+                "2. Search further"+ "\n"+
+                "3. Sort by genre"+ "\n"+
+                "4. Sort by rating"+ "\n"+
+                "\n"+"0. Back to main menu");
+        String input = ui.getInput();
+        switch (input) {
+            case "1":
+                break;
+            case "2":
+                searchMedia();
+                break;
+            case "3":
+                searchGenre();
+                break;
+            case "4":
+                searchRating();
+                break;
+            case "0":
+                mainMenu();
+                break;
+            default:
+                invalidInputMainMenu();
+        }
+
+    }
+
 
 }
