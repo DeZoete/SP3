@@ -83,9 +83,11 @@ public class StreamingService {
                     break;
                 case "4":
                     showToWatchlist();
+                    mediaChoiceInPTW(pickMedia(currentList));
                     break;
                 case "5":
                     showHistory();
+                    mediaChoice(pickMedia(currentList));
                     break;
 
                 case "9":
@@ -112,26 +114,39 @@ public class StreamingService {
         ui.displayMessage("\n"+"Please select your desired option from the menu below\n" + "\n" +
                 "1. Search for media" + "\n" +
                 "2. Find media sorted by genre" + "\n" +
+                "3. Find media sorted by rating" + "\n" +
                 "4. Show plan to watch list" + "\n" +
-                "4. Show media history" + "\n" +
+                "5. Show media history" + "\n" +
                 "\n"+"9. Log out" + "\n" +
                 "0. Exit" + "\n");
 
             String input = ui.getInput();
             switch (input) {
                 case "1":
+                    pickMediaType();
                     searchMedia();
                     listEmpty();
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "2":
-                    showHistory();
+                    pickMediaType();
+                    searchGenre();
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
                     break;
                 case "3":
-                    showToWatchlist();
+                    pickMediaType();
+                    searchRating();
+                    listEmpty();
+                    mediaChoice(pickMedia(currentList));
                     break;
                 case "4":
+                    showToWatchlist();
+                    mediaChoiceInPTW(pickMedia(currentList));
+                    break;
+                case "5":
                     showHistory();
+                    mediaChoice(pickMedia(currentList));
                     break;
                 case "9":
                     ui.displayMessage("\n" + "You have been logged out.");
@@ -173,6 +188,7 @@ public class StreamingService {
             }
             currentList = results;
             ui.displayArrayList(currentList);
+            sortFurther();
         } else if (input.equals("0")) {
             mainMenu();
         }
@@ -201,6 +217,7 @@ public class StreamingService {
             ui.displayArrayList(currentList);
         currentList = library.makeGenreList(currentList,input);
         ui.displayArrayList(currentList);
+        sortFurther();
 
         } else if (input.equals("0")) {
             mainMenu();
@@ -219,6 +236,7 @@ public class StreamingService {
             float rating = Float.parseFloat(input);
             currentList = library.makeMinimumRatingList(currentList, rating);
             ui.displayArrayList(currentList);
+            sortFurther();
 
         } else if (input.equals("0")) {
             mainMenu();
@@ -234,7 +252,7 @@ public class StreamingService {
         }else {
             currentList=currentUser.getWatchedList();
             ui.displayArrayList(currentList);
-            mainMenu();
+
         }
     }
 
@@ -245,7 +263,6 @@ public class StreamingService {
         }else {
             currentList=currentUser.getToWatchList();
             ui.displayArrayList(currentList);
-            mainMenu();
         }
     }
 
@@ -358,6 +375,47 @@ public class StreamingService {
              invalidInput();
       }
     }
+
+
+    private void mediaChoiceInPTW(Media media){
+        ui.displayMessage("1. Play "+media.getTitel()+"\n"+
+                "2. Remove from plan to watch list"+"\n"+
+                "0. Go back to main menu");
+        String input = ui.getInput();
+        switch (input){
+            case"1":
+                playMedia(media);
+                break;
+            case"2":
+                currentUser.removeFromWatchList(media);
+
+                ui.displayMessage("1. Show plan to watch list"+"\n"+
+                        "0. Go back to main menu");
+                String inputM = ui.getInput();
+                switch (inputM) {
+                    case "1":
+                    showToWatchlist();
+                    mediaChoiceInPTW(pickMedia(currentList));
+                    break;
+                    case "0":
+                        mainMenu();
+                        break;
+                    default:
+                        invalidInput();
+                        break;
+
+                }
+                break;
+            case"0":
+                mainMenu();
+                break;
+            default:
+                invalidInput();
+                break;
+        }
+    }
+
+
 
     private Media pickMedia(ArrayList<Media> list){
         ui.displayMessage("Pick media from the list above by writing a titel.");
