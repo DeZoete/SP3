@@ -152,8 +152,8 @@ public class FileIO implements FileEditor{
 
             FileWriter writer = new FileWriter(userListPath);
             for(User u: users){
-                String userToWatchList = u.getUsername()+"; ";
-                String userWatchedList = u.getUsername()+"; ";
+                String userToWatchList = u.getUsername()+" toWatch; ";
+                String userWatchedList = u.getUsername()+" watched; ";
                 for (Media m : u.getToWatchList()) {
                     userToWatchList +=m.getTitel()+"; ";
                 }
