@@ -41,10 +41,6 @@ public class User {
             return toWatchList;
 
     }
-    void addMedia(Media media){
-
-
-    }
 
     public String getUsername(){
         return username;

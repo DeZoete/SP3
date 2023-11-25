@@ -26,7 +26,9 @@ public class StreamingService {
                 "1. Sign in to an existing user \n" +
                 "2. Create a new user" + "\n" +
                 "\n" + "0. Exit" + "\n");
+        initializeLibrary();
         users = io.readUserData("src/userdata.txt");
+        io.loadUserLists("src/userlists.txt", users, media);
         String input = ui.getInput();
        switch(input){
            case "1":
@@ -36,6 +38,7 @@ public class StreamingService {
                signUp();
                break;
            case "0":
+               io.saveUserLists("src/userlists.txt",users);
                System.exit(0);
                break;
            default:
@@ -91,10 +94,12 @@ public class StreamingService {
                     break;
 
                 case "9":
+                    io.saveUserLists("src/userlists.txt",users);
                     ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
                     break;
                 case "0":
+                    io.saveUserLists("src/userlists.txt",users);
                     ui.displayMessage("\n" + "Thank you for using StreamStream.");
                     System.exit(0);
                     break;
@@ -149,10 +154,12 @@ public class StreamingService {
                     mediaChoice(pickMedia(currentList));
                     break;
                 case "9":
+                    io.saveUserLists("src/userlists.txt",users);
                     ui.displayMessage("\n" + "You have been logged out.");
                     startMenu();
                     break;
                 case "0":
+                    io.saveUserLists("src/userlists.txt",users);
                     ui.displayMessage("\n" + "Thank you for using StreamStream.");
                     System.exit(0);
                     break;
@@ -297,7 +304,6 @@ public class StreamingService {
                 ui.displayMessage("Logging in. Stand by.");
                 currentUser = c;
                 loggingin = true;
-                initializeLibrary();
                 mainMenu();
             }
         }

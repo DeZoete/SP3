@@ -145,4 +145,79 @@ public class FileIO implements FileEditor{
             }
 
 }
+
+
+    public void saveUserLists(String userListPath, ArrayList<User> users) {
+        try{
+
+            FileWriter writer = new FileWriter(userListPath);
+            for(User u: users){
+                String userToWatchList = u.getUsername()+"; ";
+                String userWatchedList = u.getUsername()+"; ";
+                for (Media m : u.getToWatchList()) {
+                    userToWatchList +=m.getTitel()+"; ";
+                }
+                for (Media m : u.getWatchedList()) {
+                    userWatchedList +=m.getTitel()+"; ";
+                }
+                userToWatchList+="\n";
+                userWatchedList+="\n";
+                writer.write(userToWatchList);
+                writer.write(userWatchedList);
+            }
+            writer.close();
+
+        } catch(IOException e){
+            System.out.println("File not found");
+
+        }
+
+    }
+
+    public void loadUserLists(String userListPath, ArrayList<User> users, ArrayList<Media> allMedia) {
+        File userFile = new File(userListPath);
+        try {
+            Scanner scan = new Scanner(userFile);
+            int count = 0;
+            Boolean mediaFound;
+            for (int i = 0; scan.hasNextLine(); i++) {
+                String split1 = scan.nextLine();
+                String[] userTowatch = split1.split("; ");
+                String split2 = scan.nextLine();
+                String[] userWatched = split2.split("; ");
+
+                for (i = 1; i < userTowatch.length; i++) {
+                    mediaFound=false;
+                    for(Media m : allMedia) {
+                        if (userTowatch[i].equals(m.getTitel())){
+                            mediaFound = true;
+                            (users.get(count)).addToWatchList(m);
+                        }
+                    }
+                    if (!mediaFound){
+                        System.out.println("Media not found :(");
+                    }
+                }
+                for (i = 1; i < userWatched.length; i++) {
+                    mediaFound=false;
+                    for(Media m : allMedia) {
+                        if (userWatched[i].equals(m.getTitel())){
+                            mediaFound = true;
+                            (users.get(count)).addWatchedList(m);
+                        }
+                    }
+                    if (!mediaFound){
+                        System.out.println("Media not found :(");
+                    }
+                }
+               count++;
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found");
+        }
+
+    }
+
+
 }
